@@ -176,6 +176,11 @@ These tools could be:
 
 Claude is the LLM of choice and Claude Code as the augmented LLM for this in this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
 
+Having an LLM running in a loop natively in the terminal console with access to bash and the file system seems like a new layer abstraction on top of the operating system, where you do not directly interact with the operating system, but rather with the LLM in natural language.
+
+> Note:
+> The current implementation uses Claude Code as the augmented LLM. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
+
 ### 2. Natural Language Prompts
 
 The workflow might consist of multiple instructions which are aggregated to send to the LLM. These instructions should also be treated as code and be following the single responsibility principle. That is, a single prompt should have a single responsibility. 
