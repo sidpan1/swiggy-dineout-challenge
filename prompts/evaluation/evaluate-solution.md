@@ -41,7 +41,7 @@ You are an expert evaluator tasked with systematically assessing a solution docu
 
 3. **Save Evaluation Results**
    - Save structured evaluation to artifacts directory as markdown file
-   - Save quantitative scores to evaluation database using save_score tool
+   - Save quantitative scores to generic evaluation database using save_score tool
    - Ensure both artifact and database records are created for tracking
 
 ## Scoring Framework
@@ -109,32 +109,138 @@ Evaluator: AI Assessment System
 4. Replace all template placeholders with actual evaluation data
 5. Include specific evidence citations from the solution document
 
+## Generic Evaluation Schema
+
+### Schema Overview
+The evaluation system now uses a completely generic database schema that can scale across any workflow type or evaluation rubric:
+
+**Core Table**: `evaluations`
+- `evaluation_id`: Primary key
+- `session_id`: Links to evaluation session
+- `workflow_type`: Generic workflow identifier (e.g., "restaurant-analysis", "code-review", "document-evaluation")
+- `evaluation_score`: Final numeric score (0-100)
+- `evaluation_rubric`: JSON field containing all rubric dimensions and scores
+- `details`: JSON field containing all use-case specific metadata
+- `created_at`: Automatic timestamp
+
+### Workflow Types
+For different evaluation scenarios, use appropriate workflow_type values:
+- **Restaurant Analysis**: `"restaurant-analysis"`
+- **Code Review**: `"code-review"`
+- **Document Evaluation**: `"document-evaluation"`
+- **System Performance**: `"system-performance"`
+- **Custom Workflows**: Any descriptive string
+
+### JSON Structure Examples
+
+**evaluation_rubric** field (flexible - any rubric structure):
+```json
+{
+  "data_accuracy": {"score": 82.0, "weight": 0.35},
+  "insight_quality": {"score": 85.0, "weight": 0.30},
+  "completeness": {"score": 68.0, "weight": 0.20},
+  "confidence_calibration": {"score": 75.0, "weight": 0.15}
+}
+```
+
+**details** field (completely flexible - any use-case data):
+```json
+{
+  "target_entity_id": "R001",
+  "solution_path": ".artifacts/acad9e9a", 
+  "notes": "Strong analytical depth but missing unified format",
+  "strengths": ["Comprehensive data analysis", "Strong ROI quantification"],
+  "weaknesses": ["Missing unified briefing format"],
+  "recommendations": ["Create integrated executive summary"],
+  "custom_field_1": "Any additional data",
+  "custom_metrics": {"response_time": 1.2, "accuracy": 0.95}
+}
+```
+
+**Alternative workflow examples**:
+```json
+// Code review workflow
+{
+  "evaluation_rubric": {
+    "code_quality": {"score": 90, "weight": 0.4},
+    "test_coverage": {"score": 85, "weight": 0.3},
+    "documentation": {"score": 70, "weight": 0.3}
+  },
+  "details": {
+    "target_entity_id": "PR-123",
+    "repository": "my-repo",
+    "files_changed": 15,
+    "lines_added": 450
+  }
+}
+
+// Document evaluation workflow  
+{
+  "evaluation_rubric": {
+    "clarity": {"score": 88, "weight": 0.5},
+    "completeness": {"score": 92, "weight": 0.5}
+  },
+  "details": {
+    "target_entity_id": "DOC-456", 
+    "document_type": "technical_spec",
+    "word_count": 2500
+  }
+}
+```
+
 ## Available Tools
 
 ### Save Score For Evaluation
-Save quantitative results to the evaluation database using the rubric dimensions defined in the PRD:
+Save quantitative results to the generic evaluation database using the new flexible schema:
 
 ```bash
+# Minimal generic usage - only required fields
 uv run tools/evaluation/save_score.py \
   --session-id "{SESSION_ID}" \
-  --solution-path "path/to/solution.md" \
+  --workflow-type "{WORKFLOW_TYPE}" \
+  --score {OVERALL_SCORE}
+
+# Extended usage with individual fields
+uv run tools/evaluation/save_score.py \
+  --session-id "{SESSION_ID}" \
+  --workflow-type "{WORKFLOW_TYPE}" \
   --score {OVERALL_SCORE} \
-  --restaurant-id "{RESTAURANT_ID}" \
-  {ADD_PARAMETERS_FOR_EACH_PRD_RUBRIC_DIMENSION} \
+  --target-entity-id "{TARGET_ENTITY_ID}" \
   --notes "Brief evaluation summary"
+
+# Advanced usage with full JSON structures
+uv run tools/evaluation/save_score.py \
+  --session-id "acad9e9a" \
+  --workflow-type "restaurant-analysis" \
+  --score 78.0 \
+  --rubric-json '{"data_accuracy":{"score":82,"weight":0.35},"insight_quality":{"score":85,"weight":0.30},"completeness":{"score":68,"weight":0.20},"confidence_calibration":{"score":75,"weight":0.15}}' \
+  --details-json '{"target_entity_id":"R001","solution_path":".artifacts/acad9e9a","notes":"Strong analysis but missing unified format","strengths":["Comprehensive analysis"],"weaknesses":["Missing integration"]}'
 ```
 
-**Note**: Use the exact parameter names that match the rubric dimensions specified in the PRD.
+**Key Features of Generic Schema**:
+- `--workflow-type`: Generic workflow identifier (required)
+- `--score`: Overall evaluation score (required)
+- `--rubric-json`: Complete rubric structure as JSON (optional)
+- `--details-json`: Complete details/metadata as JSON (optional)
+- `--target-entity-id`: Simple entity identifier (optional)
+- `--notes`: Simple text notes (optional)
+- **Completely flexible**: No hardcoded rubric dimensions - works for any evaluation type
 
 ### Trend Analysis
-Analyze evaluation patterns and trends:
+Analyze evaluation patterns and trends using the generic schema:
 
 ```bash
-# Restaurant-specific trends
-uv run tools/evaluation/get_trends.py --restaurant-id {RESTAURANT_ID} --detailed
+# Workflow-specific trends (e.g., restaurant analysis)
+uv run tools/evaluation/get_trends.py --workflow-type "restaurant-analysis" --detailed
 
-# System-wide evaluation trends
+# Entity-specific trends (e.g., specific restaurant)
+uv run tools/evaluation/get_trends.py --target-entity-id {TARGET_ENTITY_ID} --detailed
+
+# System-wide evaluation trends across all workflows
 uv run tools/evaluation/get_trends.py --limit 20 --json
+
+# Combined filtering (specific workflow + entity)
+uv run tools/evaluation/get_trends.py --workflow-type "restaurant-analysis" --target-entity-id {TARGET_ENTITY_ID}
 ```
 
 ### Database Initialization

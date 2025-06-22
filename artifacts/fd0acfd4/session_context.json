@@ -1,0 +1,12 @@
+{
+  "session_id": "fd0acfd4",
+  "restaurant_id": "R002",
+  "timestamp": "2025-06-22T22:58:08.021071",
+  "workflow": "generate-restaurant-insights",
+  "status": "initialized",
+  "artifacts_directory": "/Users/sid/Code/swiggy-dinout-challenge/.artifacts/fd0acfd4/",
+  "database": {
+    "type": "sqlite",
+    "url": "sqlite:/Users/sid/Code/swiggy-dinout-challenge/.db/swiggy_dineout.db"
+  }
+}

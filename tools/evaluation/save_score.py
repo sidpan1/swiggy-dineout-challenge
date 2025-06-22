@@ -2,125 +2,112 @@
 """
 Evaluation Score Saving Tool
 
-Saves evaluation scores and metadata to the database. This tool handles the insertion
-of evaluation records with rubric breakdowns and session context.
+Saves evaluation scores and metadata to the generic evaluation database. This tool handles 
+the insertion of evaluation records with flexible rubric dimensions and use-case specific details.
 
 Usage:
-    uv run tools/evaluation/save_score.py --session-id SESSION --solution-path PATH --score SCORE [options]
+    uv run tools/evaluation/save_score.py --session-id SESSION --workflow-type TYPE --score SCORE [options]
 
 Author: Swiggy Dineout Challenge
-Version: 1.0
+Version: 2.0
 """
 
 import sqlite3
 import json
 import argparse
-from datetime import datetime
+from pathlib import Path
 from typing import Dict, Any
+
+# Project root and default database path
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+DEFAULT_DB_PATH = PROJECT_ROOT / ".db" / "swiggy_dineout.db"
 
 
 def insert_evaluation_record(
     session_id: str,
-    solution_document_path: str,
-    overall_score: float,
-    rubric_scores: Dict[str, Dict[str, float]],
-    evaluation_details: Dict[str, Any],
-    db_path: str = "swiggy_dineout.db"
+    workflow_type: str,
+    evaluation_score: float,
+    evaluation_rubric: Dict[str, Any] = None,
+    details: Dict[str, Any] = None,
+    db_path: str = None
 ) -> int:
     """
-    Insert a new evaluation record into the database.
+    Insert a new evaluation record into the generic evaluations table.
     
-    Stores comprehensive evaluation data including overall score, rubric dimension
-    breakdowns, and associated metadata. Automatically timestamps the evaluation
-    and links it to the current session.
+    Stores evaluation data in a completely generic format that can handle any workflow type
+    and any rubric structure through JSON fields.
     
     Args:
-        session_id (str): Unique identifier for the current evaluation session
-        solution_document_path (str): File path to the solution document being evaluated
-        overall_score (float): Weighted overall evaluation score (0.0-100.0)
-        rubric_scores (Dict[str, Dict[str, float]]): Rubric dimension scores and weights.
-            Expected format:
-            {
+        session_id (str): Unique identifier for the evaluation session
+        workflow_type (str): Type of workflow being evaluated (e.g., "restaurant-analysis", "code-review")
+        evaluation_score (float): Final evaluation score (0.0-100.0)
+        evaluation_rubric (Dict[str, Any], optional): Rubric dimensions and scores as JSON.
+            Example: {
                 'data_accuracy': {'score': 85.0, 'weight': 0.35},
                 'insight_quality': {'score': 75.0, 'weight': 0.30},
-                'completeness': {'score': 90.0, 'weight': 0.20},
-                'confidence_calibration': {'score': 40.0, 'weight': 0.15}
+                'overall_weighted_score': 78.5
             }
-        evaluation_details (Dict[str, any]): Additional metadata including:
-            - restaurant_id (str): Restaurant being evaluated
-            - artifacts_folder (str): Session artifacts directory
-            - notes (str): Evaluation notes
-            - strengths (List[str]): Identified strengths
-            - weaknesses (List[str]): Identified weaknesses  
-            - recommendations (List[str]): Improvement recommendations
-        db_path (str): Path to SQLite database file
+        details (Dict[str, Any], optional): Use-case specific details as JSON.
+            Example: {
+                'restaurant_id': 'R001',
+                'solution_path': 'artifacts/analysis.md',
+                'artifacts_folder': 'session_001',
+                'notes': 'Strong analysis but missing integration',
+                'strengths': ['Comprehensive data analysis'],
+                'weaknesses': ['Missing unified format'],
+                'recommendations': ['Create integrated briefing']
+            }
+        db_path (str, optional): Path to SQLite database file
         
     Returns:
-        int: Database ID of the inserted evaluation record
+        int: evaluation_id of the inserted record
         
     Raises:
         sqlite3.Error: If database insertion fails
-        ValueError: If required rubric dimensions are missing
         
     Example:
         >>> eval_id = insert_evaluation_record(
-        ...     session_id="session_001",
-        ...     solution_document_path="analysis_workspace/R001_report.md",
-        ...     overall_score=76.25,
-        ...     rubric_scores={
-        ...         'data_accuracy': {'score': 85.0, 'weight': 0.35},
-        ...         'insight_quality': {'score': 75.0, 'weight': 0.30},
-        ...         'completeness': {'score': 90.0, 'weight': 0.20},
-        ...         'confidence_calibration': {'score': 40.0, 'weight': 0.15}
+        ...     session_id="acad9e9a",
+        ...     workflow_type="restaurant-analysis",
+        ...     evaluation_score=78.0,
+        ...     evaluation_rubric={
+        ...         'data_accuracy': {'score': 82.0, 'weight': 0.35},
+        ...         'insight_quality': {'score': 85.0, 'weight': 0.30},
+        ...         'completeness': {'score': 68.0, 'weight': 0.20},
+        ...         'confidence_calibration': {'score': 75.0, 'weight': 0.15}
         ...     },
-        ...     evaluation_details={
+        ...     details={
         ...         'restaurant_id': 'R001',
-        ...         'strengths': ['Comprehensive analysis'],
-        ...         'weaknesses': ['Too verbose'],
-        ...         'recommendations': ['Compress to 1-pager']
+        ...         'solution_path': '.artifacts/acad9e9a',
+        ...         'notes': 'Strong analytical depth but missing unified format'
         ...     }
         ... )
         >>> print(f"Saved evaluation with ID: {eval_id}")
     """
+    # Use default path if none provided
+    if db_path is None:
+        db_path = str(DEFAULT_DB_PATH)
     
-    # Extract rubric scores
-    data_accuracy = rubric_scores.get('data_accuracy', {})
-    insight_quality = rubric_scores.get('insight_quality', {})
-    completeness = rubric_scores.get('completeness', {})
-    confidence_calibration = rubric_scores.get('confidence_calibration', {})
+    # Ensure JSON fields have default values
+    if evaluation_rubric is None:
+        evaluation_rubric = {}
+    if details is None:
+        details = {}
     
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
         
         cursor.execute("""
             INSERT INTO evaluations (
-                session_id, solution_document_path, overall_score, evaluation_timestamp,
-                data_accuracy_score, data_accuracy_weight,
-                insight_quality_score, insight_quality_weight,
-                completeness_score, completeness_weight,
-                confidence_calibration_score, confidence_calibration_weight,
-                evaluation_notes, strengths, weaknesses, recommendations,
-                restaurant_id, artifacts_folder
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                session_id, workflow_type, evaluation_score, 
+                evaluation_rubric, details
+            ) VALUES (?, ?, ?, ?, ?)
         """, (
             session_id,
-            solution_document_path,
-            overall_score,
-            datetime.now().isoformat(),
-            data_accuracy.get('score', 0.0),
-            data_accuracy.get('weight', 0.0),
-            insight_quality.get('score', 0.0),
-            insight_quality.get('weight', 0.0),
-            completeness.get('score', 0.0),
-            completeness.get('weight', 0.0),
-            confidence_calibration.get('score', 0.0),
-            confidence_calibration.get('weight', 0.0),
-            evaluation_details.get('notes', ''),
-            json.dumps(evaluation_details.get('strengths', [])),
-            json.dumps(evaluation_details.get('weaknesses', [])),
-            json.dumps(evaluation_details.get('recommendations', [])),
-            evaluation_details.get('restaurant_id', ''),
-            evaluation_details.get('artifacts_folder', '')
+            workflow_type,
+            evaluation_score,
+            json.dumps(evaluation_rubric),
+            json.dumps(details)
         ))
         
         evaluation_id = cursor.lastrowid
@@ -130,51 +117,49 @@ def insert_evaluation_record(
 
 if __name__ == "__main__":
     """Command-line interface for saving evaluation scores."""
-    parser = argparse.ArgumentParser(description="Save evaluation score to database")
+    parser = argparse.ArgumentParser(description="Save evaluation score to generic evaluation database")
     parser.add_argument("--session-id", required=True, help="Session identifier")
-    parser.add_argument("--solution-path", required=True, help="Path to solution document")
+    parser.add_argument("--workflow-type", required=True, help="Workflow type (e.g., restaurant-analysis, code-review)")
     parser.add_argument("--score", type=float, required=True, help="Overall evaluation score (0-100)")
-    parser.add_argument("--restaurant-id", help="Restaurant ID (e.g., R001)")
-    parser.add_argument("--notes", default="", help="Evaluation notes")
-    parser.add_argument("--db-path", default="swiggy_dineout.db", help="Database file path")
+    parser.add_argument("--db-path", default=str(DEFAULT_DB_PATH), help="Database file path")
     
-    # Rubric scores
-    parser.add_argument("--data-accuracy", type=float, default=0.0, help="Data accuracy score")
-    parser.add_argument("--insight-quality", type=float, default=0.0, help="Insight quality score")
-    parser.add_argument("--completeness", type=float, default=0.0, help="Completeness score")
-    parser.add_argument("--confidence-calibration", type=float, default=0.0, help="Confidence calibration score")
+    # Generic fields (optional)
+    parser.add_argument("--rubric-json", help="JSON string containing rubric structure")
+    parser.add_argument("--details-json", help="JSON string containing details/metadata")
+    parser.add_argument("--target-entity-id", help="Target entity being evaluated")
+    parser.add_argument("--notes", help="Evaluation notes")
     
     args = parser.parse_args()
     
     try:
-        # Prepare rubric scores with standard weights
-        rubric_scores = {
-            'data_accuracy': {'score': args.data_accuracy, 'weight': 0.35},
-            'insight_quality': {'score': args.insight_quality, 'weight': 0.30},
-            'completeness': {'score': args.completeness, 'weight': 0.20},
-            'confidence_calibration': {'score': args.confidence_calibration, 'weight': 0.15}
-        }
+        # Parse rubric JSON if provided, otherwise empty
+        evaluation_rubric = {}
+        if args.rubric_json:
+            evaluation_rubric = json.loads(args.rubric_json)
         
-        evaluation_details = {
-            'restaurant_id': args.restaurant_id or '',
-            'notes': args.notes,
-            'strengths': [],
-            'weaknesses': [],
-            'recommendations': []
-        }
+        # Parse details JSON if provided, otherwise build from individual args
+        details = {}
+        if args.details_json:
+            details = json.loads(args.details_json)
+        else:
+            # Build from individual arguments
+            if args.target_entity_id:
+                details['target_entity_id'] = args.target_entity_id
+            if args.notes:
+                details['notes'] = args.notes
         
         eval_id = insert_evaluation_record(
             session_id=args.session_id,
-            solution_document_path=args.solution_path,
-            overall_score=args.score,
-            rubric_scores=rubric_scores,
-            evaluation_details=evaluation_details,
+            workflow_type=args.workflow_type,
+            evaluation_score=args.score,
+            evaluation_rubric=evaluation_rubric,
+            details=details,
             db_path=args.db_path
         )
         
         print(f"✅ Evaluation record saved with ID: {eval_id}")
         print(f"📊 Session: {args.session_id}")
-        print(f"📄 Solution: {args.solution_path}")
+        print(f"🔧 Workflow: {args.workflow_type}")
         print(f"🎯 Score: {args.score}")
         
     except Exception as e:

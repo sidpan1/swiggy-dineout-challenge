@@ -1,5 +1,5 @@
 # Restaurant Performance Briefing - Output Format Specification
-This is the final output format required for the restaurant performance briefing to be shared with the restaurant partner.
+This is the final output format required for the restaurant performance briefing to be shared with the restaurant partner. The file should be named as `restaurant_performance_briefing.md` and stored in the `artifacts/{session_id}/` directory.
 
 ## Document Purpose & Context
 - **Primary Use**: Sales briefing document that replaces 30min-3hr manual data gathering
@@ -24,6 +24,17 @@ This is the final output format required for the restaurant performance briefing
 - **Average Rating**: [Rating] ([+/-] vs previous period)
 - **Cancellation Rate**: [%] ([+/-]% vs previous period)
 
+### Revenue Efficiency Analysis
+- **Revenue per Cover**: ₹[Amount] vs peer average ₹[Amount] ([gap %])
+- **Channel Performance**: Online [%] | Offline [%] ([digital transformation opportunity])
+- **Pricing Power Assessment**: [Above/Below] market pricing by [%]
+- **Revenue Stability Score**: [High/Medium/Low] with volatility indicator
+
+### Booking Performance Intelligence
+- **OPD Momentum**: [Improving/Stable/Declining] with confidence level
+- **Capacity Utilization**: [%] efficiency with [top 2] optimization opportunities
+- **Booking Funnel Health**: Conversion rate [%], cancellation rate [%]
+
 ### Notable Trends & Changes
 - Specific performance trends with business impact
 - Seasonal context and trajectory indicators
@@ -46,31 +57,53 @@ This is the final output format required for the restaurant performance briefing
 - **Campaign ROI**: [Above/Below] peer average of [X]x
 - **Service Quality**: [Rating] vs peer average [Rating]
 
-### Market Position
-- Specific areas of over/underperformance
-- Competitive advantages or vulnerabilities
+### Market Position Scoring
+- **Overall Percentile Ranking**: [X]th percentile across 5 key dimensions
+- **Competitive Advantages**: [Top 2 areas of outperformance]
+- **Improvement Opportunities**: [Top 2 gaps vs peers with quantified targets]
+- **Market Opportunity Assessment**: [Positioning strategy insights]
 
-## 4. Risk Assessment & Anomalies
-- **Relationship Health**: [High/Medium/Low risk]
-- **Revenue Volatility**: [Stability indicators]
-- **Service Quality Trends**: [Any concerning patterns]
+## 4. Operational Excellence
+### Service Quality Assessment
+- **Operational Efficiency**: [X]th percentile ranking vs locality peers
+- **Service Delays**: [Average delay time] ([trend indicator])
+- **Capacity Management**: [Overbooking incidents] per month
+- **Customer Experience Score**: [Rating] based on complaint resolution and response times
+
+### Improvement Opportunities
+- **Top 3 Operational Improvements**: [Effort vs impact scoring]
+- **Estimated Revenue Impact**: ₹[Amount] from operational optimization
+- **Best Practice Gaps**: [Specific areas vs high-performing peers]
+
+## 5. Risk Assessment & Partnership Health
+### Relationship Health Scoring
+- **Overall Health**: [Green/Yellow/Red] with specific risk factors
+- **Financial Health**: Settlement processing, payment consistency
+- **Revenue Volatility**: [Stability indicators] with anomaly detection
+- **Service Quality Trends**: Review sentiment, complaint patterns
+
+### Early Warning Indicators
+- **Priority Alerts**: [Specific partnerships requiring immediate attention]
+- **Intervention Strategies**: [Timeline and priority for at-risk relationships]
 - **Competitive Pressure**: [Market threats/opportunities]
 
-## 5. Actionable Recommendations
+## 6. Actionable Recommendations
 ### Immediate Actions (Next 7 days)
 1. **[Specific Action]** - Expected Impact: ₹[Amount] | Priority: High
 2. **[Specific Action]** - Expected Impact: [%] improvement | Priority: Medium
 
 ### Strategic Initiatives (Next 30 days)
 3. **[Campaign Optimization]** - ROI improvement from [Current] to [Target]
-4. **[Operational Improvement]** - Revenue recovery: ₹[Amount]
-5. **[Competitive Response]** - Market share defense/expansion
+4. **[Revenue Optimization]** - Revenue per cover improvement: ₹[Amount]
+5. **[Operational Excellence]** - Service quality enhancement: [%] improvement
+6. **[Capacity Optimization]** - Revenue recovery through better utilization: ₹[Amount]
+7. **[Competitive Response]** - Market share defense/expansion
 
 ### Budget Recommendations
 - **Ad Spend Adjustment**: [Current: ₹X] → [Recommended: ₹Y] ([Rationale])
 - **Expected ROI**: [Current: Xx] → [Projected: Xx]
 
-## 6. Next Steps & Follow-up
+## 7. Next Steps & Follow-up
 - **Priority Actions**: [Top 2-3 actions requiring immediate attention]
 - **Partner Discussion Points**: [Key talking points for upcoming meetings]
 - **Monitoring Requirements**: [Metrics to track for next review]

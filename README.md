@@ -2,6 +2,37 @@
 
 An AI-powered co-pilot that generates sales intelligence briefings for restaurant partners by analyzing performance data across multiple dimensions (revenue, campaigns, operations, risk, and competitive positioning).
 
+## Recommended Reading Order
+
+Follow this guided tour to understand the solution architecture and technical approach:
+
+### 1. **Problem Statement** → [`docs/problem-statement.md`](docs/problem-statement.md)
+Start here to understand the business challenge, requirements, and evaluation criteria. This document outlines the core deliverables and success metrics for the Swiggy Dineout Challenge.
+
+### 2. **Problem Exploration** → [`docs/problem-exploration.md`](docs/problem-exploration.md)  
+Dive into the detailed problem analysis, user personas, and business context. Understand how Sales Executives currently spend 30min-3hrs manually gathering restaurant performance data.
+
+### 3. **Data Requirements & Generation** → [`docs/data-requirements-and-generation.md`](docs/data-requirements-and-generation.md)
+Explore the sophisticated 12-table database schema with 4,180+ realistic records. See how restaurant "personalities" drive realistic performance patterns and business scenarios.
+
+### 4. **Product Requirements Document (PRD)** → [`docs/restaurant-performance-agent-prd.md`](docs/restaurant-performance-agent-prd.md)
+Review the comprehensive PRD with user stories, acceptance criteria, evaluation rubrics, and quality standards. Understanding the multi-dimensional scoring framework.
+
+### 5. **System Architecture** → [`docs/system-architecture.md`](docs/system-architecture.md)
+Complete technical deep-dive into the multi-agent orchestration system, prompt engineering architecture, and broader vision for agentic AI workflows.
+
+### 6. **Sample Output**
+- [artifacts/acad9e9a](artifacts/acad9e9a)
+- [.artifacts/8e85652c](.artifacts/8e85652c)
+
+- A sample run is present in [artifacts/acad9e9a](artifacts/acad9e9a), with the final report generated in [here](.artifacts/acad9e9a/improvement_recommendations_R001.md).
+- A sample evaluation is present in [.artifacts/8e85652c](.artifacts/8e85652c), with the final report generated in [here](.artifacts/8e85652c/evaluation_results.md).
+
+### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
+Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
+
+---
+
 ## Overview
 
 This system addresses the real challenge faced by Sales Executives and Account Managers who manually gather performance metrics across multiple dashboards (taking 30mins to 3 hours per restaurant). Our GenAI Co-Pilot automates this process, generating structured, contextual performance summaries tailored for each restaurant partner.
@@ -13,84 +44,38 @@ This system addresses the real challenge faced by Sales Executives and Account M
 
 ## Quick Start
 
-### Generate Mode - Sales Intelligence Briefings
+### 1. Prerequisites
 
-Generate comprehensive performance analysis and improvement recommendations:
+#### Claude Code Installation
+This project requires Claude Code for AI-powered analysis. Choose one of these authentication methods:
 
+**Option 1: Claude Pro/Max Subscription (Recommended)**
+- Subscribe to Claude Pro ($20/month) or Max ($100-200/month) at [claude.ai/upgrade](https://claude.ai/upgrade)
+
+**Option 2: Anthropic API Key (Pay-per-use)**
+- Create account at [console.anthropic.com](https://console.anthropic.com)
+- Generate API key in console
+- Pay-per-token usage model
+
+#### Claude Code Setup
 ```bash
-# Generate briefing for restaurant R001
-python main.py generate R001
+# System Requirements: macOS 10.15+, Ubuntu 20.04+, or Windows via WSL
+# Install Node.js 18+ from nodejs.org
 
-# Use custom artifacts directory
-python main.py generate R001 --artifacts-dir ./custom_artifacts
+# Install Claude Code globally
+npm install -g @anthropic-ai/claude-code
 
-# Use specific session ID for tracking
-python main.py generate R001 --session-id custom123
+# Navigate to project directory and start Claude Code
+cd /path/to/swiggy-dinout-challenge
+claude
 
-# Skip session initialization (not recommended)
-python main.py generate R001 --no-session
+# First-time authentication:
+# - Select authentication method (Console API or Pro/Max subscription)
+# - Follow browser prompts to connect your account
+# - If switching from API to subscription, run: /login
 ```
 
-### Evaluate Mode - Quality Assessment
-
-Evaluate existing session results against PRD criteria and scoring rubrics:
-
-```bash
-# Evaluate a specific session's output quality
-python main.py evaluate --session-id abc123def456
-```
-
-## System Architecture
-
-### 🤖 Multi-Agent Orchestration
-- **Senior Sales Manager**: Coordinates specialized analyst deployment
-- **5 Specialized Analysts**: Revenue optimization, risk/quality, campaign performance, financial health, competitive intelligence
-- **Parallel Analysis**: Each analyst generates focused reports simultaneously
-- **Synthesis**: Integration into comprehensive sales briefing
-
-### 📊 Core Analysis Dimensions
-
-1. **Recent Performance** (30-day trends)
-   - Bookings, cancellations, revenue, ratings
-   - Notable changes and trend analysis
-
-2. **Ad Campaign Effectiveness**
-   - Spend, impressions, clicks, conversions, ROI
-   - Inefficiencies and optimization opportunities
-
-3. **Peer Benchmarking**
-   - Comparison with similar restaurants (locality + cuisine)
-   - Performance gaps and advantages
-
-4. **Actionable Recommendations**
-   - Data-backed suggestions for performance improvement
-   - Specific next steps for sales conversations
-
-### 🎯 Key Metrics Tracked
-
-| Metric | Purpose | Sales Use Case |
-|--------|---------|----------------|
-| **OPD** (Orders per day) | Demand signal | Growth tracking, benchmark vs peers |
-| **Revenue/GOV** | Traffic quality | Identify high-potential partners |
-| **Ads ROI** | Campaign effectiveness | Pitch/diagnose ads, counter objections |
-
-## System Modes
-
-### 🔧 Generate Mode
-- **Purpose**: Creates restaurant sales intelligence briefings
-- **System Prompts**: Multi-agent orchestration with specialized analysts
-- **Data Sources**: Restaurant metrics, ads data, peer benchmarks, reviews, settlements
-- **Output**: Structured markdown briefing ready for sales meetings
-
-### 📊 Evaluate Mode  
-- **Purpose**: Quality assessment against PRD evaluation rubric
-- **System Prompts**: Evaluation-specific prompts only
-- **Scoring**: Quantitative assessment with improvement recommendations
-- **Output**: Detailed evaluation report with scores and actionable feedback
-
-## Development Setup
-
-### Prerequisites
+#### Project Dependencies
 ```bash
 # Install dependencies
 uv sync
@@ -102,29 +87,22 @@ uv run tools/utils/init_database.py
 sqlite3 swiggy_dineout.db ".tables"
 ```
 
-### Code Quality
+### 2. Generate Mode - Sales Intelligence Briefings
+
+Generate comprehensive performance analysis and improvement recommendations:
+
 ```bash
-# Format code
-uv run black .
-
-# Lint code  
-uv run ruff check .
-
-# Type checking
-uv run mypy .
-
-# Run tests
-uv run pytest
+# Generate briefing for restaurant R001
+python main.py generate R001
 ```
 
-### Tool Discovery
-```bash
-# See available tools
-uv run tools/utils/get_tools.py
+### 3. Evaluate Mode - Quality Assessment
 
-# Run evaluation tools
-uv run tools/evaluation/initialize_db.py
-uv run tools/evaluation/get_trends.py
+Evaluate existing session results against PRD criteria and scoring rubrics:
+
+```bash
+# Evaluate a specific session's output quality
+python main.py evaluate --session-id acad9e9a
 ```
 
 ## File Organization
@@ -143,31 +121,3 @@ uv run tools/evaluation/get_trends.py
 └── .artifacts/           # Generated session outputs
 ```
 
-## Sample Output Structure
-
-The system generates markdown briefings containing:
-
-- **Executive Summary**: Key performance highlights
-- **Performance Analysis**: 30-day trends and metrics
-- **Campaign Assessment**: Ad effectiveness and ROI analysis  
-- **Competitive Position**: Peer benchmarking insights
-- **Recommended Actions**: Specific, data-backed next steps
-
-## Evaluation Framework
-
-Quality assessment based on:
-- **Data Accuracy**: Correct interpretation of metrics
-- **Insight Quality**: Actionable and relevant recommendations  
-- **Completeness**: Coverage of all analysis dimensions
-- **Confidence Calibration**: Appropriate uncertainty handling
-
-## Legacy Commands
-
-```bash
-# Manual Claude commands (not recommended)
-claude -p "Generate improvement recommendations for restaurant R001" \
-  --output-format stream-json --verbose --dangerously-skip-permissions \
-  --system-prompt "$(cat prompts/*.md)"
-```
-
-**Note**: Use `main.py` for proper session management, mode-specific prompt filtering, and structured artifact handling.

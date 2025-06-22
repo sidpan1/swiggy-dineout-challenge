@@ -126,6 +126,13 @@ def create_session_context(session_id, restaurant_id, artifacts_dir="./.artifact
     
     return session_context, session_dir
 
+def read_session_context(session_id):
+    """
+    Read session context from file.
+    """
+    with open(f"./.artifacts/{session_id}/session_context.json", "r") as f:
+        return json.load(f)
+
 def main():
     parser = argparse.ArgumentParser(description="Initialize restaurant analysis session")
     parser.add_argument("restaurant_id", help="Restaurant ID (e.g., R001)")
