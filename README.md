@@ -23,10 +23,11 @@ Complete technical deep-dive into the multi-agent orchestration system, prompt e
 
 ### 6. **Sample Output**
 - [artifacts/acad9e9a](artifacts/acad9e9a)
-- [.artifacts/8e85652c](.artifacts/8e85652c)
-
-- A sample run is present in [artifacts/acad9e9a](artifacts/acad9e9a), with the final report generated in [here](.artifacts/acad9e9a/improvement_recommendations_R001.md).
-- A sample evaluation is present in [.artifacts/8e85652c](.artifacts/8e85652c), with the final report generated in [here](.artifacts/8e85652c/evaluation_results.md).
+    - [improvement_recommendations_R001.md](artifacts/acad9e9a/improvement_recommendations_R001.md)
+    - [evaluation_results.md](artifacts/acad9e9a/evaluation_results.md)
+- [artifacts/8e85652c](artifacts/8e85652c)
+    - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
+    - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
 
 ### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
 Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
@@ -66,7 +67,7 @@ This project requires Claude Code for AI-powered analysis. Choose one of these a
 npm install -g @anthropic-ai/claude-code
 
 # Navigate to project directory and start Claude Code
-cd /path/to/swiggy-dinout-challenge
+cd /path/to/swiggy-dineout-challenge
 claude
 
 # First-time authentication:
