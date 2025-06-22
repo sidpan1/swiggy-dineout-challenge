@@ -167,11 +167,12 @@ These are some of the basic components that we need.
 An augmented LLM can be defined as an LLM with basic tools atatched to a running process with a file system and chat history.
 
 These tools could be:
-    * Bash tool to run commands on the file system
-    * File system tool to read and write files
-    * Web search tool to search the web
-    * Todolist tool to manage a todo list
-    * Sub-agent tool to invoke other agents
+
+* Bash tool to run commands on the file system
+* File system tool to read and write files
+* Web search tool to search the web
+* Todolist tool to manage a todo list
+* Sub-agent tool to invoke other agents
 
 Claude is the LLM of choice and Claude Code as the augmented LLM for this in this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
 

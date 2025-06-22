@@ -7,19 +7,19 @@ An AI-powered co-pilot that generates sales intelligence briefings for restauran
 Follow this guided tour to understand the solution architecture and technical approach:
 
 ### 1. **Problem Statement** → [`docs/problem-statement.md`](docs/problem-statement.md)
-Start here to understand the business challenge, requirements, and evaluation criteria. This document outlines the core deliverables and success metrics for the Swiggy Dineout Challenge.
+Build an AI-powered Co-Pilot that generates structured performance summaries for restaurant partners, reducing Sales Executive data gathering time from 30min-3hrs to under 30 seconds.
 
 ### 2. **Problem Exploration** → [`docs/problem-exploration.md`](docs/problem-exploration.md)  
-Dive into the detailed problem analysis, user personas, and business context. Understand how Sales Executives currently spend 30min-3hrs manually gathering restaurant performance data.
+Explores the broader vision of replacing fragmented business processes with unified natural language workflows that can be compiled into code and executed by agentic systems.
 
 ### 3. **Data Requirements & Generation** → [`docs/data-requirements-and-generation.md`](docs/data-requirements-and-generation.md)
-Explore the sophisticated 12-table database schema with 4,180+ realistic records. See how restaurant "personalities" drive realistic performance patterns and business scenarios.
+Detailed 12-table database schema with 4,180+ realistic records, including restaurant "personalities" that drive authentic performance patterns for AI analysis.
 
 ### 4. **Product Requirements Document (PRD)** → [`docs/restaurant-performance-agent-prd.md`](docs/restaurant-performance-agent-prd.md)
-Review the comprehensive PRD with user stories, acceptance criteria, evaluation rubrics, and quality standards. Understanding the multi-dimensional scoring framework.
+Comprehensive PRD with user stories, acceptance criteria, and evaluation rubrics targeting ≥85% accuracy and 75% reduction in meeting preparation time.
 
 ### 5. **System Architecture** → [`docs/system-architecture.md`](docs/system-architecture.md)
-Complete technical deep-dive into the multi-agent orchestration system, prompt engineering architecture, and broader vision for agentic AI workflows.
+Multi-agent orchestration system with 5 specialized analysts coordinated by a Senior Sales Manager, built on Claude Code with modular prompts and self-improving capabilities.
 
 ### 6. **Sample Output**
 - [artifacts/8e85652c](artifacts/8e85652c)
