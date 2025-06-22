@@ -67,7 +67,7 @@ More details about the agent can be found in the [Restaurant Performance Agent P
    - Reusable modules as organizational capabilities
 
 # Agentic Workflow Platform
-Stepping back from the specific use case, these agentic workflows would have the following tenets:
+Stepping back if you have to build a generic platform for building agentic workflows, it would have the following tenets: 
 
 - The workflows are executed by an LLM in a loop.
 - The workflow definitions are expressed in natural language.
@@ -85,7 +85,7 @@ Stepping back from the specific use case, these agentic workflows would have the
 
 ## Core System Flow
 
-This represents a self-improving AI system where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to bridge business requirements with technical execution through iterative improvement cycles.
+Agentic workflows are self-improving AI systems where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to bridge business requirements with technical execution through recursive iterative improvement cycles.
 
 ![Recursive Cycle](./images/recursive-cycle.svg)
 
@@ -153,9 +153,9 @@ The system contains several recursive loops:
 4. **Self-Evolution Loop**: The system can modify its own code, prompts, and workflows based on performance metrics
 
 ## Current Implementation Scope
-This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
+However, it would not be possible to build this entire system from scratch in scope of this project. This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
 
-## Curent Components of an Agentic Workflow
+## Agentic Workflow : Curent Components and Implementation
 We try to keep the architecture as simple as possible, and complexity be introduced only when there is a need. For example, the first version of an agentic workflow might be entirely LLM-driven, while future versions are optimized to be partially deterministic based on the use case. This is to avoid complexity in the beginning where requirements are not that clear. And as we get to know more of the unknowns, we can optimize the workflow to be more deterministic and efficient.
 
 These are some of the basic components that we need. 

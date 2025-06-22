@@ -48,7 +48,7 @@ Further with time, LLMs will be
 4. Cheaper to run
 5. Reliable to run asynchronously over increasing amount of time
 
-Hence it is inevitable that most of knowledge work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems.
+Hence it is inevitable that most of knowledge work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems. 
 
 This is a win-win for the business and the business users.
 
