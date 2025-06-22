@@ -162,9 +162,6 @@ These are some of the basic components that we need.
 
 ![Components](./images/components.svg)
 
-### 0. LLM
-Claude is the LLM of choice for this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed.
-
 ### 1. Augmented LLM 
 
 An augmented LLM can be defined as an LLM with basic tools atatched to a running process with a file system and chat history.
@@ -176,7 +173,7 @@ These tools could be:
     * Todolist tool to manage a todo list
     * Sub-agent tool to invoke other agents
 
-We use claude code as the augmenting LLM for this in this POC. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
+Claude is the LLM of choice and Claude Code as the augmented LLM for this in this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
 
 ### 2. Natural Language Prompts
 
