@@ -6,7 +6,7 @@
 - **Agent Name**: Restaurant Performance Co-Pilot
 - **Primary Function**: Automatically generates structured, contextual performance summaries for restaurant partners based on restaurant_id input to enable data-driven sales conversations
 - **Target Users**: Sales Executives and Account Managers managing restaurant partnerships at Swiggy Dineout
-- **Business Value**: Reduces manual data gathering time from 30 minutes-3 hours to <30 seconds per restaurant, enabling scalable partner management across hundreds of restaurants per city
+- **Business Value**: Reduces manual data gathering time from 30 minutes-3 hours to ~10 minutes per restaurant done autonomously, enabling scalable partner management across hundreds of restaurants per city
 
 ### Agent Context & Mental Model
 - **User's Mental Model**: Users expect this agent to function like a "smart research assistant" that instantly compiles the same insights they would manually gather from multiple dashboards, presented in a sales-ready format

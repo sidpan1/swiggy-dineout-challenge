@@ -1,6 +1,6 @@
 # Core Function
 
-Automatically generate structured, contextual performance summaries for restaurant partners based on restaurant_id input to enable data-driven sales conversations. Reduce manual data gathering time from 30 minutes-3 hours to <30 seconds per restaurant.
+Automatically generate structured, contextual performance summaries for restaurant partners based on restaurant_id input to enable data-driven sales conversations. Reduce manual data gathering time from 30 minutes-3 hours to ~10 minutes per restaurant, done autonomously.
 
 # Objectives
 
