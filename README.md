@@ -28,6 +28,9 @@ Complete technical deep-dive into the multi-agent orchestration system, prompt e
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
+- [artifacts/8e85652c](artifacts/8e85652c)
+    - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
+    - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
 
 ### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
 Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
