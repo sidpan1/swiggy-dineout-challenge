@@ -28,6 +28,7 @@ Complete technical deep-dive into the multi-agent orchestration system, prompt e
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
+    - [dashboard.html](artifacts/8e85652c/dashboard.html) (HTML Dashboard - download and open in browser. Quite raw, not evaluated yet)
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
