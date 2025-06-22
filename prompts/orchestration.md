@@ -28,20 +28,14 @@ Deploy specialized data analysts in **PARALLEL** according to the analysis categ
 
 ## Orchestration Workflow
 
-### Phase 1: Restaurant Assessment (2-3 minutes)
+### Phase 1: Planning (2-3 minutes)
 1. **Restaurant Profile Analysis**
    - Extract basic restaurant information (location, cuisine, capacity, tenure)
    - Identify restaurant tier and partnership status
    - Assess data availability and completeness
    - Flag any known account issues or special circumstances
 
-2. **Complexity Scoping**
-   - Determine analysis depth required (standard/enhanced/deep-dive)
-   - Identify priority areas based on recent performance patterns
-   - Set analyst deployment strategy based on available analysis categories
-   - Establish quality and timeline expectations
-
-3. **Task Delegation Planning**
+2. **Task Delegation Planning**
    - Create specific analyst briefs with clear objectives
    - Define deliverable formats and success metrics
    - Set data source assignments and tool access
@@ -49,7 +43,7 @@ Deploy specialized data analysts in **PARALLEL** according to the analysis categ
 
 ### Phase 2: Parallel Analysis Coordination (15-20 minutes)
 1. **Analyst Deployment**
-   - Issue simultaneous work orders to all assigned analysts
+   - Deploy parallel tasks to all assigned analysts
    - Monitor progress and provide guidance as needed
    - Coordinate data access and resolve conflicts
    - Ensure analysts avoid duplicating efforts
@@ -138,6 +132,15 @@ DATA FOCUS: [Key tables and metrics]
 DELIVERABLE: [Specific output format]
 CONTEXT: [Restaurant background and special notes]
 DEADLINE: [Expected completion time]
+```
+
+### How to render parallel tasks
+Render multiple tasks in parallel using the following format:
+```
+Task(description="<>", prompt=<>)
+Task(description="<>", prompt=<>)
+Task(description="<>", prompt=<>)
+...
 ```
 
 ### Quality Monitoring

@@ -4,64 +4,6 @@ The Swiggy Dineout GenAI Co-Pilot Challenge aims to build an AI-powered tool tha
 
 For detailed information about the challenge requirements, datasets, and evaluation criteria, please refer to [Problem Statement](problem-statement.md).
 
-# Requirements
-
-## Functional Requirements
-
-### Core Features
-1. **Restaurant Performance Analysis**
-   - Generate 30-day performance summary (bookings, cancellations, revenue, ratings)
-   - Identify notable trends and changes
-   - Calculate key metrics (OPD, Revenue/GOV, Ads ROI)
-
-2. **Ad Campaign Effectiveness**
-   - Analyze spend, impressions, clicks, conversions, and ROI
-   - Identify inefficiencies and highlights
-   - Compare performance against benchmarks
-
-3. **Peer Benchmarking**
-   - Compare restaurant metrics with similar restaurants in same locality and cuisine
-   - Identify overperforming and underperforming areas
-   - Provide context for performance gaps
-
-4. **Recommendations Engine**
-   - Generate data-informed actionable recommendations
-   - Suggest ad spend adjustments, discount optimizations, and campaign improvements
-   - Provide specific monetary and percentage-based suggestions
-
-### Input/Output Requirements
-- **Input**: Single restaurant_id
-- **Output**: Structured markdown or narrative format summary
-- **Data Sources**: Mock datasets for restaurant_metrics, ads_data, peer_benchmarks
-
-## Non-Functional Requirements
-
-1. **Performance**
-   - Generate insights within reasonable time (< 30 seconds)
-   - Handle multiple restaurant requests efficiently
-   - Scalable across hundreds of partners per city
-
-2. **Quality & Accuracy**
-   - Generate meaningful, context-rich summaries using LLMs
-   - Handle uncertainty and low-confidence outputs appropriately, for example hallucinations
-   - Provide actionable insights rather than perfect analytics accuracy
-
-3. **Usability**
-   - Clear, concise, and structured output format
-   - Sales Executive-friendly language and presentation
-   - Ready-to-use format for meetings and partner communications
-
-4. **Technical Architecture**
-   - Support for multiple LLM providers (OpenAI, Claude, Mistral, etc.)
-   - Retrieval-Augmented Generation (RAG) or prompt chaining capabilities
-   - Modular design for reusability and maintainability
-   - Mock data generation and management
-
-5. **Scalability**
-   - Potential for batch processing multiple restaurants
-   - Extensible architecture for additional data sources
-   - Reusable modules as organizational capabilities
-
 # The Broader Business Problem
 While this problem statement is very interesting, instead of trying to solve for it specifically, we will try to step back and understand what is the broader business problem that this problem statement is trying to solve.
 
@@ -91,32 +33,24 @@ This fragmented and disintegrated approach creates several critical business pro
 ## Conceptual Solution
 What if all business processes could be written in natural language and then compiled into code wherever execution is needed? This code would be extended and reviewed by software engineers before merged into the main codebase. Further code would also be reconciled back to the natural language definition continuously. This approach would use agents to bridge the gap between business intent and technical implementation, making workflows transparent, auditable, and easily modifiable by business users.
 
-![Recursive Cycle](./images/recursive-cycle.svg)
-
 **Enter LLMs** : LLMs are great at generating text, but that is not their only strength. They are also great at calling tools to gather context, reasoning, and finally calling other tools to take actions. These LLMs when stationed in an environment where they can sense the environment state & events, reason about the current context and take actions towards a goal also known as agentic systems, can be used to build intelligent workflows which can be used to augment human decision making. These workflows are no different from natural language SOPs which are written by humans, for humans, with the only difference being that they are executed by an agentic system.
 
 # Business Value
-The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective.
+The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective. Business users can now focus on the strategic business logic and let the agentic system take care of the rest.
+
+![human-ai-interaction.svg](./images/human-ai-interaction.svg)
+
+Further with time, LLMs will be
+
+1. Better at reasoning
+2. Better at following instructions
+3. Increased in context window size
+4. Cheaper to run
+5. Reliable to run asynchronously over increasing amount of time
+
+Hence it is inevitable that most of knowledge work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems.
 
 This is a win-win for the business and the business users.
-
-# The Agentic Workflow : Tenets
-These agentic workflows would have the following tenets:
-
-- The workflows are executed by an LLM in a loop.
-- The workflow definitions are expressed in natural language.
-- The workflows compile into code wherever deterministic execution is required.
-- The workflows can call tools to gather context, reason and take actions.
-- The workflows can build higher order abstractions by using exisitng tools and workflows as building blocks.
-- The workflows can invoke the human in the loop where required.
-- The workflows can be triggered by a schedule, event or a user request. 
-- The workflows can be hierarchically nested to call other workflows as sub-workflows.
-- These workflows can be paused and resumed based on the environment state and events.
-- The workflows can save and read context for communication across the different steps in a single execution.
-- The workflows can retain information across executions to improve their performance over time.
-- The workflows are self-healing to deal with errors and failures on the fly.
-- The workflows are self-evolving to improve their code/prompts over time.
-
 
 
 

@@ -80,13 +80,18 @@ def create_session_context(session_id, restaurant_id, artifacts_dir="./.artifact
         'R001'
     """
     
-    # Create artifacts directory structure
-    session_dir = f"{artifacts_dir}/{session_id}"
+    # Create artifacts directory structure with absolute path
+    artifacts_dir_abs = os.path.abspath(artifacts_dir)
+    session_dir = f"{artifacts_dir_abs}/{session_id}"
     os.makedirs(session_dir, exist_ok=True)
+    
+    # Create logs subdirectory
+    logs_dir = f"{session_dir}/logs"
+    os.makedirs(logs_dir, exist_ok=True)
     
     # Get database configuration from environment variables
     db_type = os.getenv("DATABASE_TYPE", "sqlite")
-    db_url = os.getenv("DATABASE_URL", "sqlite:///swiggy_dineout.db")
+    db_url = os.getenv("DATABASE_URL", "sqlite:/Users/sid/Code/swiggy-dinout-challenge/.db/swiggy_dineout.db")
     
     # Create session context
     session_context = {
@@ -95,7 +100,7 @@ def create_session_context(session_id, restaurant_id, artifacts_dir="./.artifact
         "timestamp": datetime.now().isoformat(),
         "workflow": "generate-restaurant-insights",
         "status": "initialized",
-        "artifacts_directory": f"/{artifacts_dir}/{session_id}/",
+        "artifacts_directory": f"{session_dir}/",
         "database": {
             "type": db_type,
             "url": db_url

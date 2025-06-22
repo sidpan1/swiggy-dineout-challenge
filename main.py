@@ -27,28 +27,29 @@ Version: 2.0
 """
 
 import argparse
-import glob
 import json
-import subprocess
 import sys
 from pathlib import Path
+
+import anyio
+from claude_code_sdk import query, ClaudeCodeOptions, Message
 
 from tools.utils.initialize_session import create_session_context, generate_session_id
 
 # Mode-specific prompt whitelists
 GENERATE_MODE_PROMPTS = [
     "orchestration.md",
-    "analysis-categories.md", 
-    "data-sources.md",
     "artifacts-protocol.md",
     "instructions.md",
+    "analysis-categories.md", 
+    "data-sources.md",
     "output-format.md",
     "tools.md",
     "tools-build.md"
 ]
 
 EVALUATE_MODE_PROMPTS = [
-    "evaluation/evaluate-solution.md"
+    "evaluation/evaluate-solution.md",
 ]
 
 
@@ -75,7 +76,7 @@ def initialize_session(restaurant_id, artifacts_dir="./.artifacts", session_id=N
             session_id = generate_session_id()
 
         # Create session context directly
-        session_context = create_session_context(
+        session_context, session_dir = create_session_context(
             session_id, restaurant_id, artifacts_dir
         )
 
@@ -149,9 +150,9 @@ def load_system_prompts(mode="generate"):
     return system_prompt
 
 
-def run_claude_analysis(mode, restaurant_id, session_info, system_prompt, session_id=None):
+async def run_claude_analysis(mode, restaurant_id, session_info, system_prompt, session_id=None):
     """
-    Call Claude to perform analysis based on the specified mode.
+    Call Claude to perform analysis based on the specified mode using the Python SDK.
 
     Args:
         mode (str): Analysis mode - "generate" or "evaluate"
@@ -161,10 +162,10 @@ def run_claude_analysis(mode, restaurant_id, session_info, system_prompt, sessio
         session_id (str): Session ID (for evaluate mode)
 
     Returns:
-        subprocess.CompletedProcess: Claude command result
+        dict: Analysis result with output and metadata
 
     Raises:
-        subprocess.CalledProcessError: If Claude command fails
+        Exception: If Claude analysis fails
     """
     if mode == "generate":
         print(f"🤖 Generating improvement recommendations for {restaurant_id}...")
@@ -194,21 +195,10 @@ Use the session context for any run-time information.
 ---
 
 """
-        print(f"Session Context: {session_context}")
+        
         enhanced_system_prompt = session_context + system_prompt
 
-    # Build Claude command
-    cmd = [
-        "claude",
-        "-p",
-        user_prompt,
-        "--output-format",
-        "stream-json",
-        "--verbose",
-        "--dangerously-skip-permissions",
-        "--system-prompt",
-        enhanced_system_prompt,
-    ]
+    # print(f"System Prompt: {enhanced_system_prompt}")
 
     try:
         # Create logs directory
@@ -223,30 +213,46 @@ Use the session context for any run-time information.
 
         log_file_path = logs_dir / log_filename
 
-        # Run Claude command
         print("🔄 Executing Claude analysis...")
         print(f"📝 Output will be logged to: {log_file_path}")
 
-        # Run command and capture output
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, encoding="utf-8", errors="replace"
+        # Set up Claude Code options with session directory as working directory
+        if session_info and "artifacts_directory" in session_info:
+            # Use the session artifacts directory as the working directory
+            working_dir = Path(session_info["artifacts_directory"])
+            print(f"📁 Using session artifacts directory as working directory: {working_dir}")
+        else:
+            # Fallback to current directory if no session info
+            working_dir = Path.cwd()
+            print(f"📁 Using current directory as working directory: {working_dir}")
+            
+        options = ClaudeCodeOptions(
+            system_prompt=enhanced_system_prompt,
+            cwd=working_dir,
+            permission_mode="bypassPermissions"
         )
 
-        if result.returncode != 0:
-            print(f"❌ Claude command failed with return code: {result.returncode}")
-            print(f"STDERR: {result.stderr}")
-            raise subprocess.CalledProcessError(result.returncode, cmd, result.stderr)
+        # Collect all messages from the SDK
+        messages: list[Message] = []
+        output_content = []
+        
+        async for message in query(prompt=user_prompt, options=options):
+            messages.append(message)
+            
+            # Log the message as JSON for compatibility
+            message_json = json.dumps(message, default=str, indent=2)
+            output_content.append(message_json)
+            
+            # Print progress for assistant messages
+            if hasattr(message, 'type') and message.get('type') == 'assistant':
+                print("📝 Received assistant response...")
 
-        # Clean the output
-        clean_output = (
-            result.stdout.replace("\x00", "").replace("\r\n", "\n").replace("\r", "\n")
-        )
-
+        # Combine all output
+        full_output = "\n".join(output_content)
+        
         # Save to log file
         with open(log_file_path, "w", encoding="utf-8") as log_file:
-            log_file.write(clean_output)
-            if result.stderr:
-                log_file.write(f"\n--- STDERR ---\n{result.stderr}")
+            log_file.write(full_output)
 
         print("✅ Analysis completed successfully")
         print(f"📄 Full output logged to: {log_file_path}")
@@ -254,25 +260,27 @@ Use the session context for any run-time information.
         # Save output to session artifacts directory
         if session_info and "artifacts_directory" in session_info:
             if mode == "generate":
-                output_file = f"{session_info['artifacts_directory']}/improvement_recommendations.json"
+                output_file = f"{session_info['artifacts_directory']}/logs/run_log.json"
             else:  # evaluate mode
-                output_file = f"{session_info['artifacts_directory']}/evaluation_results.json"
+                output_file = f"{session_info['artifacts_directory']}/logs/eval_log.json"
             
             with open(output_file, "w", encoding="utf-8") as f:
-                f.write(clean_output)
+                f.write(full_output)
             print(f"💾 Output also saved to: {output_file}")
 
-        return result
+        # Return result in similar format to subprocess.CompletedProcess
+        return {
+            'stdout': full_output,
+            'messages': messages,
+            'returncode': 0
+        }
 
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Claude command failed: {e.stderr}")
-        raise
     except Exception as e:
         print(f"❌ Error during analysis: {str(e)}")
-        raise
+        raise e
 
 
-def run_evaluation_mode(session_id):
+async def run_evaluation_mode(session_id):
     """
     Run evaluation mode for an existing session.
     
@@ -280,11 +288,11 @@ def run_evaluation_mode(session_id):
         session_id (str): Session ID to evaluate
         
     Returns:
-        subprocess.CompletedProcess: Claude command result
+        dict: Claude analysis result
         
     Raises:
         FileNotFoundError: If session artifacts don't exist
-        subprocess.CalledProcessError: If Claude command fails
+        Exception: If Claude analysis fails
     """
     print(f"📊 Starting evaluation mode for session: {session_id}")
     
@@ -303,14 +311,22 @@ def run_evaluation_mode(session_id):
     # Load evaluation system prompts
     system_prompt = load_system_prompts("evaluate")
     
+    # also provide the path to the prompts used for inspection.
+    inspection_prompts = f"""
+    # The following prompts are used for inspection:
+    {load_system_prompts("generate")}. They will be found in the following directory: {Path("prompts")}
+    """
+    
+    system_prompt = system_prompt + "\n\n" + inspection_prompts
+    
     # Run Claude analysis in evaluate mode
-    result = run_claude_analysis("evaluate", None, session_info, system_prompt, session_id)
+    result = await run_claude_analysis("evaluate", None, session_info, system_prompt, session_id)
     
     return result
 
 
-def main():
-    """Main entry point for the script."""
+async def async_main():
+    """Async main entry point for the script."""
     parser = argparse.ArgumentParser(
         description="Swiggy Dineout Challenge - Restaurant Performance Analysis System",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -393,7 +409,7 @@ Examples:
             system_prompt = load_system_prompts("generate")
 
             # Step 3: Generate recommendations
-            result = run_claude_analysis(
+            result = await run_claude_analysis(
                 "generate", args.restaurant_id, session_info, system_prompt
             )
 
@@ -401,7 +417,7 @@ Examples:
             print("\n" + "=" * 80)
             print("📊 GENERATION RESULTS")
             print("=" * 80)
-            print(result.stdout)
+            print(result['stdout'])
 
             if session_info:
                 print(
@@ -413,13 +429,13 @@ Examples:
             
         elif args.mode == "evaluate":
             # Evaluate mode execution
-            result = run_evaluation_mode(args.session_id)
+            result = await run_evaluation_mode(args.session_id)
             
             # Display results
             print("\n" + "=" * 80)
             print("📊 EVALUATION RESULTS")
             print("=" * 80)
-            print(result.stdout)
+            print(result['stdout'])
             
             print(f"\n🆔 Evaluated Session ID: {args.session_id}")
             print("\n✅ Evaluation completed successfully!")
@@ -430,6 +446,11 @@ Examples:
     except Exception as e:
         print(f"\n❌ Error: {str(e)}")
         sys.exit(1)
+
+
+def main():
+    """Main entry point for the script."""
+    anyio.run(async_main)
 
 
 if __name__ == "__main__":

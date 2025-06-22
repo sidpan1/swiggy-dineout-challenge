@@ -1,288 +1,298 @@
-# System Architecture: Claude Code as a New Computing Primitive
+# System Architecture
 
 ## The Problem: Sales Intelligence at Scale
 
 Swiggy Dineout Sales Executives spend **30 minutes to 3 hours** manually gathering restaurant performance data before each partner meeting. With hundreds of partners per city, this approach doesn't scale.
 
-**Required Analysis**: OPD (Orders Per Day), Revenue/GOV, Ads ROI across "bookings, ad performance, campaign ROI, peer comparisons, and discount effectiveness"
+## The Solution: Restaurant Performance Agent
 
-**Solution**: Reduce to **<30 seconds** automated analysis using Claude Code as an orchestration primitive.
+The Restaurant Performance Agent is an AI agent that generates a restaurant performance briefing for a given restaurant_id.
 
-## Claude Code: A New Computing Primitive
+More details about the agent can be found in the [Restaurant Performance Agent PRD](restaurant-performance-agent-prd.md).
 
-This project demonstrates **Claude Code as a new primitive for business process automation**—where complex multi-step workflows are expressed in natural language and executed by an AI agent with full tool access.
+## Product Requirements
 
-### Traditional Computing Primitives
-- **Functions**: Reusable code blocks
-- **Classes**: Object-oriented abstractions  
-- **APIs**: Service interfaces
-- **Databases**: Data persistence
+### Functional Requirements
+1. **Restaurant Performance Analysis**
+   - Generate 30-day performance summary (bookings, cancellations, revenue, ratings)
+   - Identify notable trends and changes
+   - Calculate key metrics (OPD, Revenue/GOV, Ads ROI)
 
-### Claude Code as Primitive
-- **Natural Language Workflows**: Business logic expressed as markdown prompts
-- **Agentic Execution**: AI agent with database access, file operations, session management
-- **Tool Integration**: Direct terminal access for real operations
-- **Context Awareness**: Full project understanding across multiple files and data sources
+2. **Ad Campaign Effectiveness**
+   - Analyze spend, impressions, clicks, conversions, and ROI
+   - Identify inefficiencies and highlights
+   - Compare performance against benchmarks
 
-## How Claude Code Enables This Architecture
+3. **Peer Benchmarking**
+   - Compare restaurant metrics with similar restaurants in same locality and cuisine
+   - Identify overperforming and underperforming areas
+   - Provide context for performance gaps
 
-### Single Command Orchestration
+4. **Recommendations Engine**
+   - Generate data-informed actionable recommendations
+   - Suggest ad spend adjustments, discount optimizations, and campaign improvements
+   - Provide specific monetary and percentage-based suggestions
+
+### Input/Output Requirements
+- **Input**: Single restaurant_id
+- **Output**: Structured markdown or narrative format summary
+- **Data Sources**: Mock datasets for restaurant_metrics, ads_data, peer_benchmarks
+
+### Non-Functional Requirements
+
+1. **Performance**
+   - Generate insights within reasonable time (< 5 minutes)
+   - Handle multiple restaurant requests efficiently
+   - Scalable across hundreds of partners per city
+
+2. **Quality & Accuracy**
+   - Generate meaningful, context-rich summaries using LLMs
+   - Handle uncertainty and low-confidence outputs appropriately, for example hallucinations
+   - Provide actionable insights rather than perfect analytics accuracy
+
+3. **Usability**
+   - Clear, concise, and structured output format
+   - Sales Executive-friendly language and presentation
+   - Ready-to-use format for meetings and partner communications
+
+4. **Technical Architecture**
+   - Support for multiple LLM providers (OpenAI, Claude, Mistral, etc.)
+   - Retrieval-Augmented Generation (RAG) or prompt chaining capabilities
+   - Modular design for reusability and maintainability
+   - Mock data generation and management
+
+5. **Scalability**
+   - Potential for batch processing multiple restaurants
+   - Extensible architecture for additional data sources
+   - Reusable modules as organizational capabilities
+
+# Agentic Workflow Platform
+Stepping back from the specific use case, these agentic workflows would have the following tenets:
+
+- The workflows are executed by an LLM in a loop.
+- The workflow definitions are expressed in natural language.
+- The workflows compile into code wherever deterministic execution is required.
+- The workflows can call tools to gather context, reason and take actions.
+- The workflows can build higher order abstractions by using exisitng tools and workflows as building blocks.
+- The workflows can invoke the human in the loop where required.
+- The workflows can be triggered by a schedule, event or a user request. 
+- The workflows can be hierarchically nested to call other workflows as sub-workflows.
+- These workflows can be paused and resumed based on the environment state and events.
+- The workflows can save and read context for communication across the different steps in a single execution.
+- The workflows can retain knowledge across executions to improve their performance over time.
+- The workflows are self-healing to deal with errors and failures on the fly.
+- The workflows are self-evolving to improve their code/prompts over time.
+
+## Core System Flow
+
+This represents a self-improving AI system where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to bridge business requirements with technical execution through iterative improvement cycles.
+
+![Recursive Cycle](./images/recursive-cycle.svg)
+
+### 1. **Initial Problem Input**
+- **Product Owner** enters a problem statement to solve a business problem
+- This triggers the entire agentic workflow system
+
+### 2. **Natural Language Workflow Generation**
+- Agents help build other agents or natural language workflows for a persona
+- Uses the problem statement, PRD (Product Requirements Document), and other relevant context
+- This is approved by Domain Expert and Product Owner after review
+
+### 3. **Workflow Compilation**
+- Agents compile these natural language workflows into a mixture of:
+  - **Agents** (for cognitive execution)
+  - **Code** (for deterministic execution)
+- Requires Technical Expert approval at this stage
+- The Technical Expert is responsible for ensuring that the code is correct and works as expected, efficient and performant
+- The Technical may suggest more changes and implement them with agents.
+
+### 5. **Code Improvement**
+- Agents help improve the code to make it more:
+  - Efficient
+  - Performant
+  - Platformized
+- These tasks are done asynchronously in the background and sent for review periodically to technical experts. 
+
+### 6. **State Reconciliation**
+- Agents reconcile the state of code from the main branch
+- Aligns with exact sources of truth
+- Updates the natural language workflows accordingly
+- Product owners, domain experts, and technical experts review this change to make sure they are in line with the source of truth. 
+
+### 7. **Evaluation System Building**
+- Agents build systems to evaluate other agents
+- Uses fitness scores based on aggregate success metrics
+- These evaluations are attested by domain experts to make sure labeled and agentic evaluations match.
+
+### 8. **Evolutionary Programming**
+- Agents use evolutionary programming to improve the entire system end-to-end
+- This includes orchestration, code, tools, prompts, etc.
+- Based on success metrics
+- Product owners, domain experts, and technical experts review this change to make sure they are in line with the source of truth. 
+
+### 8. **Model Training** 
+- Agents use evolutionary programming to:
+  - Build proprietary datasets
+  - Write code to train small specialized models
+  - Incrementally improve performance for specific use cases
+- Technical experts attest the gains made through these experiments and approve the changes.
+
+## Feedback and Improvement Loops
+
+The system contains several recursive loops:
+
+1. **Primary Improvement Loop**: The circular flow in the center represents continuous improvement where outputs feed back as inputs
+
+2. **Human-in-the-Loop Validation**: Multiple approval points ensure quality:
+   - Product Owner approval (business alignment)
+   - Domain Expert approval (technical correctness)
+   - "Expert" approval (specialized validation)
+
+3. **Data Labeling Loop**: End users, product owners, domain experts, or third-party humans label data based on guidelines, feeding back into the system
+
+4. **Self-Evolution Loop**: The system can modify its own code, prompts, and workflows based on performance metrics
+
+## Current Implementation Scope
+This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
+
+## Curent Components of an Agentic Workflow
+We try to keep the architecture as simple as possible, and complexity be introduced only when there is a need. For example, the first version of an agentic workflow might be entirely LLM-driven, while future versions are optimized to be partially deterministic based on the use case. This is to avoid complexity in the beginning where requirements are not that clear. And as we get to know more of the unknowns, we can optimize the workflow to be more deterministic and efficient.
+
+These are some of the basic components that we need. 
+
+![Components](./images/components.svg)
+
+### 0. LLM
+Claude is the LLM of choice for this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed.
+
+### 1. Augmented LLM 
+
+An augmented LLM can be defined as an LLM with basic tools atatched to a running process with a file system and chat history.
+
+These tools could be:
+    * Bash tool to run commands on the file system
+    * File system tool to read and write files
+    * Web search tool to search the web
+    * Todolist tool to manage a todo list
+    * Sub-agent tool to invoke other agents
+
+We use claude code as the augmenting LLM for this in this POC. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
+
+### 2. Natural Language Prompts
+
+The workflow might consist of multiple instructions which are aggregated to send to the LLM. These instructions should also be treated as code and be following the single responsibility principle. That is, a single prompt should have a single responsibility. 
+
+The current prompts folder contains modular prompt components that define the agentic workflow:
+
+#### Business Logic
+- **orchestration.md**: Defines the Senior Sales Manager agent that coordinates specialized analyst deployment
+- **instructions.md**: General system instructions and behavior guidelines
+- **analysis-categories.md**: Defines 5 specialized analyst roles:
+  - Revenue Optimization Analyst
+  - Risk & Quality Assessment Analyst  
+  - Campaign Performance Analyst
+  - Financial Health Analyst
+  - Competitive Intelligence Analyst
+- **data-sources.md**: Specifies available database tables and data schema
+- **artifacts-protocol.md**: Standardizes output formats and file organization
+- **output-format.md**: Defines structured report templates
+
+### Utilities
+- **tools.md**: Available tools for database operations and analysis
+- **tools-build.md**: Instructions for building and extending tool capabilities
+
+### Evaluation Framework
+- **evaluation/evaluate-solution.md**: Quality assessment criteria and metrics
+
+Each prompt follows single responsibility principle - one specific function per prompt file. The orchestration prompt coordinates these specialized components to create comprehensive restaurant performance briefings.
+
+### 3. Additional Tools
+These are deterministic parts which augment the LLM with more context or help the LLM take actions. The LLM itself can also write tools on the fly and execute them to get results. Essentially, the llm builds higher-order abstractions based on need, converting natural language to deterministic code. These tools are present in the tools folder.
+
+The current tools folder contains utilities organized by function:
+
+#### Database & Session Management (`tools/utils/`)
+- **init_database.py**: Initializes SQLite database schema with restaurant performance tables
+- **initialize_session.py**: Sets up analysis sessions for specific restaurants (e.g., `R001`)
+- **get_tools.py**: Tool discovery utility to list available analysis capabilities
+
+#### Evaluation & Metrics (`tools/evaluation/`)
+- **initialize_db.py**: Sets up evaluation database for tracking analysis quality
+- **get_trends.py**: Extracts performance trends and patterns from historical data
+- **save_score.py**: Records analysis quality scores and performance metrics
+
+All tools are designed to be LLM-augmented, meaning they can be dynamically composed and extended by the AI agents during analysis workflows. Tools follow the principle of building higher-order abstractions from basic operations. 
+
+Currently, these tools are implemented as bash tools since that was the simplest way. They could also be implemented as MCP tools integrating into clients like Claude Code easily. 
+
+### Artifacts
+Currently, all the artifacts are stored in the local artifact directory grouped by session ID. 
+
+# CLI API Interface
+
+The system is exposed as a Python CLI application through `main.py`, providing two operational modes for restaurant performance analysis.
+
+## Command Line Interface
+
+### Generate Mode (Default)
+Creates restaurant improvement recommendations using specialized AI analysts:
+
 ```bash
-python generate_recommendations.py R001
-# Executes: claude -p "Generate improvement recommendations for restaurant R001" 
-#          --system-prompt "$(cat prompts/*.md)" --output-format stream-json
+# Generate a restaurant performance briefing for a given restaurant_id
+python main.py generate R001
 ```
 
-**What Actually Happens**:
-1. **Session Management**: Creates unique session ID, artifact directories
-2. **Prompt Compilation**: Loads business logic from markdown files  
-3. **Claude Code Execution**: AI agent executes multi-step workflow
-4. **Tool Integration**: Database queries, file operations, structured output
+#### Generate Mode - Development (Future)
+In this mode, the LLM can create functions during its execution during the development phase which can be committed and used in production. This is a way to get the LLM to build tools on the fly.
 
-### Claude Code's Unique Capabilities in This Project
-
-#### 1. Natural Language Business Logic
-Instead of writing Python functions for analysis, the entire workflow is defined in markdown:
-
-```markdown
-# Senior Sales Manager - Multi-Agent Orchestration System
-Deploy specialized data analysts in PARALLEL:
-- Revenue Optimization Analyst: Capacity utilization, pricing efficiency
-- Campaign Performance Analyst: ROI analysis, marketing effectiveness  
-- Competitive Intelligence Analyst: Market positioning, peer benchmarking
-```
-
-#### 2. Agentic Database Operations
-Claude Code directly queries SQLite database based on natural language instructions:
-
-```markdown
-# Data Sources
-Use sqlite bash tool to query the database:
-sqlite3 {db_url_from_session} "SELECT campaign_id, spend, revenue_generated 
-FROM ads_data WHERE restaurant_id = 'R001';"
-```
-
-#### 3. Multi-File Orchestration
-Claude Code maintains context across all prompt files and generates coordinated analysis:
-- Reads session context from `initialize_session.py`
-- Loads business logic from 9 prompt files
-- Executes database queries based on `data-sources.md`
-- Generates structured artifacts per `artifacts-protocol.md`
-
-#### 4. Real File Operations
-Claude Code creates actual analysis artifacts:
-```
-.artifacts/2957a1b9/
-├── improvement_recommendations_R001_20250622.md
-├── campaign_performance_analysis_R001_20250622.md  
-├── competitive_intelligence_analysis_R001_20250622.md
-└── [5 more specialized analysis files]
-```
-
-## Why Claude Code is a "New Primitive"
-
-### Traditional Development vs Claude Code
-
-#### Traditional Approach (What This Would Require)
-```python
-class CampaignAnalyst:
-    def analyze_roi(self, restaurant_id):
-        # 50+ lines of SQL queries, data processing, calculations
-        
-class RevenueAnalyst:
-    def analyze_capacity(self, restaurant_id):
-        # 100+ lines of operational metrics processing
-        
-class SalesIntelligenceOrchestrator:
-    def generate_briefing(self, restaurant_id):
-        # 200+ lines orchestrating analysts, formatting output
-        
-# Total: ~500+ lines of Python code to maintain
-```
-
-#### Claude Code Approach (What We Actually Built)
 ```bash
-# Business logic in natural language (9 markdown files)
-# Execution in single command:
-claude -p "Generate improvement recommendations for restaurant R001" 
-      --system-prompt "$(cat prompts/*.md)"
+# Generate a restaurant performance briefing for a given restaurant_id
+python main.py generate-dev R001
 ```
+The prompts tool.md and tools build.md provide these instructions. Essentially, an agent is working at the meta-level, building higher-order abstractions for the future. 
 
-**Result**: Business stakeholders can modify analysis logic by editing markdown files, no Python programming required.
+### Evaluate Mode
+Evaluates existing session results against PRD criteria:
 
-### The Primitive Breakthrough
-
-**Traditional Primitives** require technical expertise:
-- **Functions**: Need programming knowledge
-- **APIs**: Need interface design
-- **Databases**: Need schema design
-
-**Claude Code Primitive** is business-stakeholder accessible:
-- **Natural Language Workflows**: Domain experts can read and modify
-- **Tool Integration**: Database access, file operations happen automatically  
-- **Context Preservation**: Maintains state across complex multi-step processes
-
-### Real Evidence of the Primitive in Action
-
-**Input**: Single restaurant ID (`R001`)
-**Processing**: Claude Code executes natural language workflow across 12 database tables
-**Output**: Sales Executive gets immediately usable intelligence:
-
-- "Increase ad spend by ₹5,000/month → ₹44,150 additional monthly revenue"
-- "Focus on 12 PM, 4-6 PM, 10-11 PM slots for capacity optimization"  
-- "Rating volatility (3.6-4.3) requires operational excellence program"
-
-**Key Innovation**: The entire business process is **readable and modifiable by Sales Managers** who understand restaurant operations but don't write code.
-
-## Technical Architecture: Claude Code + Structured Data
-
-### Challenge Requirements vs Implementation
-
-**Basic Challenge**: 3 tables (restaurant_metrics, ads_data, peer_benchmarks)
-**Our Implementation**: 12-table business intelligence platform
-
-**Why?** Claude Code enables complex analysis workflows, so we built comprehensive data architecture to generate **actionable sales intelligence** rather than basic reports.
-
-### Claude Code's Database Integration
-
-Claude Code executes SQL queries based on natural language instructions in `data-sources.md`:
-
-```markdown
-# Query restaurant performance metrics
-sqlite3 {db_url_from_session} "SELECT restaurant_id, date, bookings, revenue 
-FROM restaurant_metrics WHERE restaurant_id = 'R001' ORDER BY date DESC LIMIT 5;"
-
-# Analyze campaign ROI  
-sqlite3 {db_url_from_session} "SELECT campaign_id, spend, revenue_generated,
-(revenue_generated/spend) as roi FROM ads_data WHERE restaurant_id = 'R001';"
-```
-
-**Result**: Claude Code automatically queries the right tables based on analysis requirements, no hard-coded SQL in Python.
-
-## Claude Code Execution Model
-
-### The Critical Command
 ```bash
-# generate_recommendations.py line 184-191:
-cmd = [
-    "claude",
-    "-p", "Generate improvement recommendations for restaurant R001",
-    "--output-format", "stream-json",
-    "--verbose", 
-    "--dangerously-skip-permissions",
-    "--system-prompt", enhanced_system_prompt  # All 9 markdown files combined
-]
+# Evaluate a specific session
+python main.py evaluate --session-id abc123def456
 ```
 
-### What Makes This a "Primitive"
-
-**1. Natural Language System Prompts**
-Instead of coded business logic, the entire workflow is defined in markdown that business stakeholders can read and modify:
-
-```markdown
-# orchestration.md
-You are a Senior Sales Manager for Swiggy Dineout, responsible for 
-orchestrating a team of specialized data analysts to generate 
-comprehensive sales intelligence briefings.
-
-Deploy specialized data analysts in PARALLEL:
-- Revenue Optimization Analyst: Capacity utilization, pricing efficiency
-- Campaign Performance Analyst: ROI analysis, marketing effectiveness
-- Competitive Intelligence Analyst: Market positioning, peer benchmarking
+### Optimize Mode (Future)
+Will automatically improve code, prompts, and workflows based on performance metrics:
+```bash
+# Optimize system components based on evaluation results
+python main.py optimize --session-id abc123def456
+python main.py optimize --component prompts --metric accuracy
 ```
 
-**2. Agentic Tool Integration**
-Claude Code automatically:
-- Reads session context from `initialize_session.py` 
-- Queries SQLite database based on instructions in `data-sources.md`
-- Creates structured artifacts per `artifacts-protocol.md`
-- Maintains context across multi-step analysis
+### Reconcile Mode (Future)  
+Will synchronize system state with source of truth and update workflows accordingly:
+```bash
+# Reconcile session state with main branch
+python main.py reconcile --session-id abc123def456
+python main.py reconcile --sync-prompts --sync-tools
+```
 
-**3. Real Business Value**
-Output is immediately usable by Sales Executives:
-- "Spice Garden shows 8.83x ROI vs 3.2x peer benchmark"
-- "Increase ad spend by ₹5,000/month for ₹44,150 additional revenue"
-- "Rating volatility (3.6-4.3) requires operational excellence program"
+These modes will implement points **5** and **6** from the core system flow, enabling continuous improvement and state synchronization capabilities.
 
-**Time Saved**: 30 minutes to 3 hours → 30 seconds
+## Data Flow Architecture
 
-## Challenge Impact: Demonstrating the Primitive
+```
+CLI Input → Session Init → Prompt Loading → Claude Analysis → Output Generation
+    ↓           ↓              ↓               ↓              ↓
+Restaurant  Session ID    System Prompt    AI Agents     Structured
+   ID       Generation    Assembly         Execution     Reports
+```
 
-### Meeting the Evaluation Criteria
+## Future Components
+* LLM Gateway
+* Telemetry & Observability 
+* Cloud Deployments
+* Orchestrator (synchronous, asynchronous and batch processing)
+* Persistence (database, distributed file system, etc.)
+* User interfaces (CLI, API, GUI, etc.)
 
-**Problem Solving** ✅: Used Claude Code as a primitive to structure business process automation rather than traditional development
-
-**Quality of Insights** ✅: Generated specific, actionable intelligence:
-- "Increase ad spend by ₹5,000/month → ₹44,150 additional revenue"
-- "Reallocate 30% budget to lunch campaigns (14.65% vs 8.77% conversion)"
-
-**Technical Excellence** ✅: Demonstrated Claude Code's capabilities:
-- Multi-agent orchestration through natural language prompts
-- Database integration without hard-coded SQL
-- Session management and artifact generation
-- Real file operations and structured output
-
-**Product Thinking** ✅: Solved the core user problem—transforming 30 minutes to 3 hours of manual work into 30 seconds automated analysis
-
-**Reusability** ✅: Business logic is expressed in markdown files that domain experts can modify without programming knowledge
-
-### Why This Represents a New Primitive
-
-**Traditional Primitives** → **Claude Code Primitive**
-- Functions → Natural Language Workflows
-- APIs → Tool Integration
-- Classes → Agentic Execution  
-- SQL → Natural Language Data Instructions
-
-**Evidence**: A Sales Manager can modify campaign analysis logic by editing `analysis-categories.md` without touching Python code, yet the system executes complex database queries and generates structured business intelligence.
-
-**Scale**: This approach could automate thousands of business processes across organizations where domain experts can directly modify workflows expressed in natural language.
-
-## Challenge Evaluation Criteria: How This Solution Delivers
-
-### Problem Solving ✅
-**Challenge**: "How well you structure the problem and define your approach"
-**Delivered**: Structured the problem as **natural language business process automation** - going beyond "generate a report" to demonstrate a scalable platform for organizational workflow automation.
-
-### Quality of Insights ✅  
-**Challenge**: "How useful and actionable are the insights generated"
-**Delivered**: Specific monetary recommendations with implementation timelines:
-- "Increase ad spend by ₹5,000/month → ₹44,150 additional monthly revenue"
-- "Focus on 12 PM, 4-6 PM, 10-11 PM slots for ₹8,500-12,000 daily uplift"
-
-### Technical Excellence ✅
-**Challenge**: "Overall solution design, ability to reason over data, scalability, reusability"
-**Delivered**: 
-- **Multi-agent orchestration** with 5 specialized analysts
-- **12-table data architecture** vs basic 3-table requirement
-- **Session management** for production readiness
-- **Natural language business logic** for maximum reusability
-
-### Product Thinking ✅
-**Challenge**: "Does this save the user time? Would they use this before every call?"
-**Delivered**: Transforms **30 minutes to 3 hours** of manual work into **<30 seconds** automated analysis with specific talking points Sales Executives can immediately use.
-
-### Data Handling ✅
-**Challenge**: "Realism and quality of your sample data and metrics"  
-**Delivered**: Comprehensive business intelligence across operational, financial, and competitive dimensions with realistic restaurant performance patterns.
-
-### Creativity & Craftsmanship ✅
-**Challenge**: "Attention to detail, clarity of output, highlighting anomalies"
-**Delivered**: Session-based artifact generation, structured markdown output, anomaly detection, and multi-dimensional analysis beyond basic requirements.
-
-## Platform Vision Realized
-
-This solution demonstrates the **future of organizational workflow automation**:
-
-1. **Business processes written in natural language** (prompt files)
-2. **Executed by AI agents with tool access** (database queries, analysis)  
-3. **Generating structured, actionable intelligence** (sales briefings)
-4. **With built-in quality assurance and feedback loops** (Manager Reviewer)
-
-**Result**: Business stakeholders can directly modify workflows without technical expertise while maintaining production-grade reliability and scale.
-
-**Impact**: From "Sales Executives spend 30 minutes to 3 hours manually gathering data" to "Sales Executives have instant access to comprehensive intelligence for hundreds of partners."
-
----
-
-*This architecture represents a foundational building block for natural language business process automation - where business intent is directly expressed as executable workflows, bridging the gap between domain expertise and technical implementation.*
+# Conclusion
+This architecture and implementation serve as the founding stone of a larger platform shift where we will be able to build systems with humans and machines always in sync. 
