@@ -1,0 +1,118 @@
+{
+  "analysis_metadata": {
+    "restaurant_id": "R001",
+    "peer_group": {
+      "locality": "Koramangala",
+      "cuisine": "Indian",
+      "peer_count": 8,
+      "comparison_period": "30 days"
+    },
+    "generated_at": "2025-06-21T18:36:45.123456"
+  },
+  "performance_ranking": {
+    "overall_rank": 2,
+    "total_peers": 8,
+    "percentile": 75.0
+  },
+  "key_insights": [
+    "Bookings 21% above peer average",
+    "Revenue per booking 354% above peers",
+    "Customer rating 0.3 points above peers",
+    "Ad ROI significantly above peer benchmark (+141%)"
+  ],
+  "competitive_position": "top_performer",
+  "detailed_comparison": {
+    "booking_metrics": {
+      "target_performance": 16.0,
+      "peer_average": 13.2,
+      "gap_percentage": 21.2,
+      "rank": 3,
+      "status": "overperforming"
+    },
+    "revenue_metrics": {
+      "target_performance": 1725,
+      "peer_average": 380,
+      "gap_percentage": 353.6,
+      "rank": 1,
+      "status": "significantly_overperforming"
+    },
+    "satisfaction_metrics": {
+      "target_performance": 4.4,
+      "peer_average": 4.1,
+      "gap_percentage": 7.3,
+      "rank": 2,
+      "status": "overperforming"
+    },
+    "advertising_metrics": {
+      "target_performance": 6.5,
+      "peer_average": 2.7,
+      "gap_percentage": 140.6,
+      "rank": 1,
+      "status": "significantly_overperforming"
+    }
+  },
+  "competitive_advantages": {
+    "premium_positioning": {
+      "advantage": "354% higher revenue per booking than peers",
+      "strategy": "Successfully positioned as premium dining destination",
+      "opportunity": "Maintain quality while exploring volume growth"
+    },
+    "advertising_excellence": {
+      "advantage": "Ad ROI 2.4x higher than peer average",
+      "strategy": "Highly optimized ad campaigns with strong conversion",
+      "opportunity": "Scale successful campaigns to capture more market share"
+    },
+    "customer_satisfaction": {
+      "advantage": "Above-average customer rating (4.4 vs 4.1)",
+      "strategy": "Consistent service quality and customer experience",
+      "opportunity": "Leverage positive reviews for organic growth"
+    }
+  },
+  "market_positioning": {
+    "position": "Premium market leader in Koramangala Indian cuisine segment",
+    "differentiation": "High-value dining experience with superior customer satisfaction",
+    "market_share": "Strong position with room for volume expansion",
+    "competitive_threats": "Limited - operating in premium segment with strong fundamentals"
+  },
+  "strategic_recommendations": {
+    "short_term": [
+      "Scale advertising budget to capitalize on superior ROI performance",
+      "Focus on increasing booking volume while maintaining premium positioning",
+      "Leverage high customer satisfaction for word-of-mouth marketing"
+    ],
+    "medium_term": [
+      "Expand operational capacity to handle increased demand",
+      "Develop loyalty programs to enhance customer retention",
+      "Monitor competitor responses to market share gains"
+    ],
+    "long_term": [
+      "Consider expansion to additional locations with similar demographics",
+      "Develop proprietary dining experiences to strengthen differentiation",
+      "Build brand recognition beyond immediate locality"
+    ]
+  },
+  "peer_analysis": {
+    "top_performer_profile": {
+      "estimated_performance": "Likely achieving 18-20 daily bookings with similar revenue efficiency",
+      "success_factors": "High visibility, operational excellence, strong local reputation",
+      "learnable_strategies": "Marketing approaches, operational processes, customer engagement"
+    },
+    "peer_group_trends": {
+      "average_performance": "Most peers struggling with lower revenue per booking",
+      "common_challenges": "Ad campaign optimization, pricing strategy, customer acquisition",
+      "market_dynamics": "Competitive landscape with room for differentiated players"
+    }
+  },
+  "opportunity_quantification": {
+    "market_share_expansion": {
+      "current_position": "Strong #2 position with premium differentiation",
+      "growth_potential": "20-30% booking volume increase without compromising margins",
+      "revenue_impact": "₹200,000-300,000 additional monthly revenue potential"
+    },
+    "advertising_scale": {
+      "current_efficiency": "6.5x ROI significantly above 2.7x peer average",
+      "scale_opportunity": "Double ad spend while maintaining 5x+ ROI",
+      "expected_outcome": "₹25,000 additional monthly spend generating ₹125,000+ revenue"
+    }
+  }
+}

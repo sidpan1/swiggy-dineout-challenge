@@ -1,0 +1,241 @@
+# Generate Restaurant Report
+
+## Description
+Generates a structured, contextual performance summary for a restaurant partner - a 1-pager that Sales Executives can review before meetings or send directly to partners. This aligns with the Swiggy Dineout GenAI Co-Pilot challenge requirements.
+
+## Inputs
+Natural language prompt with session context requesting report generation:
+- "SESSION_ID=abc123 Create comprehensive report for restaurant R001"
+- "SESSION_ID=def456 Generate Sales Executive summary for Spice Garden restaurant"
+- "SESSION_ID=ghi789 Compile analysis results into partner-ready report for restaurant R002"
+
+## Artifact Management
+This workflow integrates with the artifact management protocol:
+- **Input**: Loads all analysis results from `/artifacts/{session_id}/` directory
+- **Output**: Saves single report to `/artifacts/{session_id}/restaurant_report.md`
+- **Logging**: Updates `/artifacts/{session_id}/workflow_execution.md` with completion status
+- **Context**: Reads session configuration from `/artifacts/{session_id}/session_context.md`
+
+## Steps
+
+### 1. Initialize Session Context
+- Extract SESSION_ID from prompt or environment variables
+- Verify session directory exists at `/artifacts/{session_id}/`
+- Load session context from `/artifacts/{session_id}/session_context.md`
+- Update workflow execution log: mark generate-restaurant-report as started
+
+### 2. Compile Analysis Results
+Load all insights from previous workflow executions:
+```bash
+# Load all analysis results from shared artifacts
+RESTAURANT_DATA=$(cat /artifacts/{session_id}/restaurant_data.json)
+PERFORMANCE_TRENDS=$(cat /artifacts/{session_id}/performance_trends.json)
+AD_EVALUATION=$(cat /artifacts/{session_id}/ad_evaluation.json)
+PEER_INSIGHTS=$(cat /artifacts/{session_id}/peer_insights.json)
+ANOMALIES=$(cat /artifacts/{session_id}/anomalies.json)
+RECOMMENDATIONS=$(cat /artifacts/{session_id}/recommendations.json)
+```
+
+### 3. Generate Restaurant Performance Report
+
+Create a clear, concise, and actionable briefing following the problem statement requirements:
+
+#### Required Content Structure:
+1. **Restaurant's Recent Performance**
+   - OPD (Orders per day), cancellations, revenue, and average rating over last 30 days
+   - Notable changes or trends
+
+2. **Ad Campaign Effectiveness**
+   - Spend, impressions, clicks, conversions, and ROI
+   - Any inefficiencies or highlights
+
+3. **Peer Benchmarking**
+   - Comparison with similar restaurants in same locality and cuisine
+   - Areas of overperformance or underperformance
+
+4. **Recommended Next Steps**
+   - Suggestions to improve performance (increase ad spend, adjust discounting, campaign timing)
+
+### 4. Format Report Structure
+Generate the report using this template:
+
+```markdown
+# Restaurant Performance Report: [Restaurant Name] ([Restaurant ID])
+
+**Report Date**: [Current Date]
+**Analysis Period**: Last 30 days
+**Prepared for**: Sales Executive Team
+
+## Restaurant's Recent Performance
+
+### Key Metrics (Last 30 Days)
+- **OPD (Orders per Day)**: [X.X] orders
+- **Total Orders**: [XXX] orders
+- **Cancellations**: [XX] ([X.X]% cancellation rate)
+- **Revenue**: ₹[X,XX,XXX]
+- **Average Rating**: [X.X]/5.0
+- **Revenue per Order**: ₹[XXX]
+
+### Notable Trends
+- [Trend description with specific data points]
+- [Performance patterns and changes]
+- [Peak performance periods]
+
+## Ad Campaign Effectiveness
+
+### Campaign Performance Summary
+- **Total Spend**: ₹[XX,XXX] (last 60 days)
+- **Impressions**: [XX,XXX]
+- **Clicks**: [X,XXX] ([X.X]% CTR)
+- **Conversions**: [XXX] orders
+- **ROI**: [X.X]x
+
+### Campaign Breakdown
+- [Campaign Name]: ₹[X,XXX] spend, [X.X]x ROI - [Performance assessment]
+- [Campaign Name]: ₹[X,XXX] spend, [X.X]x ROI - [Performance assessment]
+- [Campaign Name]: ₹[X,XXX] spend, [X.X]x ROI - [Performance assessment]
+
+## Peer Benchmarking ([Locality] [Cuisine] Restaurants)
+
+### Performance vs Peers
+- **OPD**: [X.X] vs [X.X] peer avg ([±XX]%) - [Performance indicator]
+- **Revenue per Order**: ₹[XXX] vs ₹[XXX] peer avg ([±XX]%) - [Performance indicator]
+- **Rating**: [X.X] vs [X.X] peer avg ([±XX]%) - [Performance indicator]
+- **Ad ROI**: [X.X]x vs [X.X]x peer avg ([±XX]%) - [Performance indicator]
+
+### Market Position
+- Ranking: [X]th out of [Y] peer restaurants
+- [Key competitive advantages or gaps]
+- [Market opportunity assessment]
+
+## Recommended Next Steps
+
+### Immediate Actions (Next 2 Weeks)
+1. **[Action Title]**: [Specific recommendation]
+   - Expected impact: [Quantified benefit]
+
+2. **[Action Title]**: [Specific recommendation]
+   - Expected impact: [Quantified benefit]
+
+### Short-term Initiatives (1-2 Months)
+3. **[Initiative Title]**: [Detailed recommendation]
+   - Target: [Specific goal]
+   - Expected impact: [Quantified benefit]
+
+### Long-term Strategy (3+ Months)
+4. **[Strategy Title]**: [Strategic recommendation]
+5. **[Strategy Title]**: [Strategic recommendation]
+
+---
+*Generated by Swiggy Dineout Restaurant Intelligence System*
+```
+
+### 5. Save Report to Artifacts
+Save the structured report as required by problem statement:
+
+```bash
+# Save restaurant performance report
+cat > /artifacts/{session_id}/restaurant_report.md << 'EOF'
+# Restaurant Performance Report: Spice Garden (R001)
+
+**Report Date**: $(date +%Y-%m-%d)
+**Analysis Period**: Last 30 days
+**Prepared for**: Sales Executive Team
+
+## Restaurant's Recent Performance
+
+### Key Metrics (Last 30 Days)
+- **OPD (Orders per Day)**: 8.2 orders
+- **Total Orders**: 246 orders
+- **Cancellations**: 20 (8.1% cancellation rate)
+- **Revenue**: ₹1,80,500
+- **Average Rating**: 4.2/5.0
+- **Revenue per Order**: ₹734
+
+### Notable Trends
+- +5% growth in orders over last 2 weeks
+- Stable rating performance (4.2 average)
+- Peak performance on weekends (Fri-Sat 6-9 PM)
+
+## Ad Campaign Effectiveness
+
+### Campaign Performance Summary
+- **Total Spend**: ₹15,000 (last 60 days)
+- **Impressions**: 45,000
+- **Clicks**: 3,825 (8.5% CTR)
+- **Conversions**: 89 orders
+- **ROI**: 2.1x
+
+### Campaign Breakdown
+- Weekend Boost: ₹6,000 spend, 3.2x ROI - Strong performer
+- Lunch Deals: ₹4,500 spend, 1.8x ROI - Below target
+- Visibility Push: ₹4,500 spend, 1.6x ROI - Underperforming
+
+## Peer Benchmarking (Koramangala Indian Restaurants)
+
+### Performance vs Peers
+- **OPD**: 8.2 vs 12.5 peer avg (-34%) - Underperforming
+- **Revenue per Order**: ₹734 vs ₹670 peer avg (+10%) - Outperforming
+- **Rating**: 4.2 vs 4.1 peer avg (+2%) - Above average
+- **Ad ROI**: 2.1x vs 2.8x peer avg (-25%) - Underperforming
+
+### Market Position
+- Ranking: 5th out of 8 peer restaurants
+- Revenue efficiency advantage despite lower volume
+- Room for improvement in marketing effectiveness
+
+## Recommended Next Steps
+
+### Immediate Actions (Next 2 Weeks)
+1. **Reallocate Ad Budget**: Move ₹2,000 from underperforming Visibility Push to Weekend Boost campaigns
+   - Expected impact: +15 monthly orders, +₹18,000 revenue
+
+2. **Address Rating Consistency**: Investigate any service quality fluctuations
+   - Expected impact: Maintain competitive rating advantage
+
+### Short-term Initiatives (1-2 Months)
+3. **Optimize Booking Conversion**: Improve conversion rate to match peer average
+   - Target: Increase conversion from 8.5% to 9.5%
+   - Expected impact: +20 monthly orders
+
+4. **Launch Happy Hour Strategy**: Implement afternoon pricing strategy (2-5 PM)
+   - Expected impact: +12 weekly orders during slow periods
+
+### Long-term Strategy (3+ Months)
+5. **Scale Successful Campaigns**: Increase budget for high-performing weekend campaigns
+6. **Market Share Growth**: Systematic approach to reach peer-level order volume
+
+---
+*Generated by Swiggy Dineout Restaurant Intelligence System*
+EOF
+
+# Update workflow execution log
+echo "### generate-restaurant-report - completed" >> /artifacts/{session_id}/workflow_execution.md
+echo "- **Started**: $(date)" >> /artifacts/{session_id}/workflow_execution.md
+echo "- **Completed**: $(date)" >> /artifacts/{session_id}/workflow_execution.md
+echo "- **Artifacts Created**: restaurant_report.md" >> /artifacts/{session_id}/workflow_execution.md
+echo "- **Notes**: Single 1-pager report generated per problem statement requirements" >> /artifacts/{session_id}/workflow_execution.md
+echo "" >> /artifacts/{session_id}/workflow_execution.md
+```
+
+## Output Format
+A single markdown file containing a structured, contextual performance summary that includes:
+
+1. **Restaurant Performance Overview** - OPD, revenue, ratings, trends
+2. **Ad Campaign Analysis** - Spend, impressions, clicks, conversions, ROI
+3. **Peer Benchmarking** - Competitive positioning by locality and cuisine
+4. **Actionable Recommendations** - Specific next steps with expected impact
+
+## Success Criteria
+- Complete 1-pager report generated as per problem statement
+- All required metrics included (OPD, revenue, ad performance, peer comparison)
+- Actionable insights clearly presented
+- Sales Executive-ready format achieved
+- Report generation completed within 40 seconds
+- Single file output for immediate use
+
+## Dependencies
+- Results from all previous analysis workflows
+- Restaurant master data for context
+- Report formatting standards
+- Markdown generation capabilities

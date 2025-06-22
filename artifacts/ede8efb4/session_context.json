@@ -1,0 +1,8 @@
+{
+  "session_id": "ede8efb4",
+  "restaurant_id": "R001",
+  "timestamp": "2025-06-21T18:31:58.253254",
+  "workflow": "generate-restaurant-insights",
+  "status": "initialized",
+  "artifacts_directory": "/artifacts/ede8efb4/"
+}

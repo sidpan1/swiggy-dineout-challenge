@@ -1,0 +1,30 @@
+{
+  "workflows": [
+    {
+      "workflow": "collect-restaurant-data",
+      "status": "completed",
+      "timestamp": "2025-06-21T18:32:10.973856",
+      "artifacts_created": [
+        "restaurant_data.json",
+        "peer_benchmarks.json",
+        "ads_data.json"
+      ]
+    },
+    {
+      "workflow": "analyze-performance-trends",
+      "status": "completed",
+      "timestamp": "2025-06-21T18:32:23.281006",
+      "artifacts_created": [
+        "performance_trends.json"
+      ]
+    },
+    {
+      "workflow": "detect-anomalies",
+      "status": "completed",
+      "timestamp": "2025-06-21T18:39:10.526323",
+      "artifacts_created": [
+        "anomalies.json"
+      ]
+    }
+  ]
+}

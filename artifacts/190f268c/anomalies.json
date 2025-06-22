@@ -1,0 +1,281 @@
+{
+  "analysis_metadata": {
+    "restaurant_id": "R001",
+    "session_id": "190f268c",
+    "analysis_date": "2025-06-21T18:54:30.524722",
+    "total_anomalies_detected": 13,
+    "analysis_period": {
+      "start_date": "2025-05-22",
+      "end_date": "2025-06-21",
+      "total_days": 31
+    }
+  },
+  "anomaly_summary": {
+    "total_anomalies": 13,
+    "by_severity": {
+      "critical": 0,
+      "high": 8,
+      "medium": 4,
+      "low": 1
+    },
+    "by_type": {
+      "statistical_outliers": 0,
+      "sudden_changes": 11,
+      "operational_anomalies": 0,
+      "trend_anomalies": 1,
+      "competitive_anomalies": 1,
+      "ad_campaign_anomalies": 0
+    }
+  },
+  "categorized_anomalies": {
+    "critical": [],
+    "high": [
+      {
+        "date": "2025-06-20",
+        "metric": "revenue",
+        "value": 41915.16,
+        "previous_value": 13618.8,
+        "change_percent": 207.77425323817081,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "metric": "bookings",
+        "value": 21,
+        "previous_value": 10,
+        "change_percent": 110.00000000000001,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-06-10",
+        "metric": "revenue",
+        "value": 34941.72,
+        "previous_value": 15334.77,
+        "change_percent": 127.85943317050076,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-06-10",
+        "metric": "bookings",
+        "value": 22,
+        "previous_value": 11,
+        "change_percent": 100.0,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-06-05",
+        "metric": "revenue",
+        "value": 33489.66,
+        "previous_value": 17700.9,
+        "change_percent": 89.19749843228311,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-06-02",
+        "metric": "revenue",
+        "value": 39865.14,
+        "previous_value": 16339.4,
+        "change_percent": 143.98166395338873,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-05-31",
+        "metric": "revenue",
+        "value": 39862.62,
+        "previous_value": 21811.32,
+        "change_percent": 82.76115338273888,
+        "type": "sudden_change",
+        "severity": "high"
+      },
+      {
+        "date": "2025-05-22",
+        "metric": "revenue",
+        "value": 38565.45,
+        "previous_value": 19691.04,
+        "change_percent": 95.85278380420738,
+        "type": "sudden_change",
+        "severity": "high"
+      }
+    ],
+    "medium": [
+      {
+        "date": "2025-06-16",
+        "metric": "revenue",
+        "value": 17432.7,
+        "previous_value": 43594.2,
+        "change_percent": -60.01142353799358,
+        "type": "sudden_change",
+        "severity": "medium"
+      },
+      {
+        "date": "2025-06-14",
+        "metric": "revenue",
+        "value": 23070.24,
+        "previous_value": 14260.8,
+        "change_percent": 61.773813530797725,
+        "type": "sudden_change",
+        "severity": "medium"
+      },
+      {
+        "date": "2025-05-27",
+        "metric": "revenue",
+        "value": 44594.56,
+        "previous_value": 28812.0,
+        "change_percent": 54.77773150076356,
+        "type": "sudden_change",
+        "severity": "medium"
+      },
+      {
+        "metric": "revenue_growth_rate",
+        "value": -20.51,
+        "type": "negative_trend",
+        "description": "Significant revenue decline: -20.5%",
+        "severity": "medium"
+      }
+    ],
+    "low": [
+      {
+        "metric": "revenue_vs_peers",
+        "value": 5.692794674645157,
+        "type": "competitive_outlier",
+        "description": "Revenue 5.7x above peer average",
+        "severity": "low"
+      }
+    ]
+  },
+  "all_anomalies": [
+    {
+      "date": "2025-06-20",
+      "metric": "revenue",
+      "value": 41915.16,
+      "previous_value": 13618.8,
+      "change_percent": 207.77425323817081,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-06-20",
+      "metric": "bookings",
+      "value": 21,
+      "previous_value": 10,
+      "change_percent": 110.00000000000001,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-06-16",
+      "metric": "revenue",
+      "value": 17432.7,
+      "previous_value": 43594.2,
+      "change_percent": -60.01142353799358,
+      "type": "sudden_change",
+      "severity": "medium"
+    },
+    {
+      "date": "2025-06-14",
+      "metric": "revenue",
+      "value": 23070.24,
+      "previous_value": 14260.8,
+      "change_percent": 61.773813530797725,
+      "type": "sudden_change",
+      "severity": "medium"
+    },
+    {
+      "date": "2025-06-10",
+      "metric": "revenue",
+      "value": 34941.72,
+      "previous_value": 15334.77,
+      "change_percent": 127.85943317050076,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-06-10",
+      "metric": "bookings",
+      "value": 22,
+      "previous_value": 11,
+      "change_percent": 100.0,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-06-05",
+      "metric": "revenue",
+      "value": 33489.66,
+      "previous_value": 17700.9,
+      "change_percent": 89.19749843228311,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-06-02",
+      "metric": "revenue",
+      "value": 39865.14,
+      "previous_value": 16339.4,
+      "change_percent": 143.98166395338873,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-05-31",
+      "metric": "revenue",
+      "value": 39862.62,
+      "previous_value": 21811.32,
+      "change_percent": 82.76115338273888,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "date": "2025-05-27",
+      "metric": "revenue",
+      "value": 44594.56,
+      "previous_value": 28812.0,
+      "change_percent": 54.77773150076356,
+      "type": "sudden_change",
+      "severity": "medium"
+    },
+    {
+      "date": "2025-05-22",
+      "metric": "revenue",
+      "value": 38565.45,
+      "previous_value": 19691.04,
+      "change_percent": 95.85278380420738,
+      "type": "sudden_change",
+      "severity": "high"
+    },
+    {
+      "metric": "revenue_growth_rate",
+      "value": -20.51,
+      "type": "negative_trend",
+      "description": "Significant revenue decline: -20.5%",
+      "severity": "medium"
+    },
+    {
+      "metric": "revenue_vs_peers",
+      "value": 5.692794674645157,
+      "type": "competitive_outlier",
+      "description": "Revenue 5.7x above peer average",
+      "severity": "low"
+    }
+  ],
+  "insights": [
+    "Found 8 high-severity anomalies requiring immediate attention",
+    "Detected 4 medium-severity anomalies for monitoring",
+    "Multiple sudden_change anomalies detected (11 instances)"
+  ],
+  "recommendations": [
+    "Investigate high-severity anomalies first - they may indicate operational issues",
+    "Monitor medium-severity anomalies for patterns over time"
+  ],
+  "risk_assessment": {
+    "overall_risk_level": "high",
+    "immediate_action_required": true,
+    "monitoring_recommended": true
+  }
+}
