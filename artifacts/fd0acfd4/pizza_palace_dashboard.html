@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Palace Performance Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .risk-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: #d97706;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+        }
+
+        /* Executive Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-card h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-trend {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .positive { color: #059669; }
+        .negative { color: #dc2626; }
+        .warning { color: #d97706; }
+        .neutral { color: #3b82f6; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        /* Analysis Grid */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analysis-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .analysis-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 200px;
+            margin: 1rem 0;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .metric-value-small {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Revenue Opportunity Section */
+        .opportunity-section {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        .opportunity-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .opportunity-metric {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .opportunity-metric h4 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .opportunity-metric .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .recommendations h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .recommendation-group {
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-group h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .recommendation-item.high-priority {
+            border-left-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .recommendation-item.medium-priority {
+            border-left-color: #d97706;
+            background: #fffbeb;
+        }
+
+        .priority-badge {
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .priority-badge.high {
+            background: #dc2626;
+        }
+
+        .priority-badge.medium {
+            background: #d97706;
+        }
+
+        .recommendation-content {
+            flex: 1;
+        }
+
+        .recommendation-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1e293b;
+        }
+
+        .recommendation-content p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .risk-badge {
+                position: static;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Pizza Palace</h1>
+            <div class="meta">Restaurant ID: R002 | Period: Last 30 days | Generated: June 22, 2025</div>
+            <div class="risk-badge">MEDIUM RISK</div>
+        </div>
+
+        <!-- Executive Summary Cards -->
+        <div class="summary-cards">
+            <div class="metric-card">
+                <h3>Daily Bookings</h3>
+                <div class="metric-value positive">15.5</div>
+                <div class="metric-trend positive">+18.3% vs peers (13.1)</div>
+                <div class="progress-bar">
+                    <div class="progress-fill positive" style="width: 75%; background: #059669;"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Daily Revenue</h3>
+                <div class="metric-value positive">₹26,982</div>
+                <div class="metric-trend positive">+25.1% vs peers (₹21,564)</div>
+                <div class="progress-bar">
+                    <div class="progress-fill positive" style="width: 80%; background: #059669;"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Campaign ROI</h3>
+                <div class="metric-value positive">6.09x</div>
+                <div class="metric-trend positive">+103% vs benchmark (3.0x)</div>
+                <div class="progress-bar">
+                    <div class="progress-fill positive" style="width: 95%; background: #059669;"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Service Rating</h3>
+                <div class="metric-value warning">4.20</div>
+                <div class="metric-trend negative">-0.06 vs peers (4.26)</div>
+                <div class="progress-bar">
+                    <div class="progress-fill warning" style="width: 40%; background: #d97706;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Grid -->
+        <div class="analysis-grid">
+            <!-- Revenue Analysis -->
+            <div class="analysis-card">
+                <h3>Revenue Analysis</h3>
+                <div class="chart-wrapper">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Revenue per Cover</span>
+                    <span class="metric-value-small positive">₹578.89 (+5.5%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Online/Offline Split</span>
+                    <span class="metric-value-small">40.1% / 59.9%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Revenue Volatility</span>
+                    <span class="metric-value-small warning">25.5% (High Risk)</span>
+                </div>
+            </div>
+
+            <!-- Operational Excellence -->
+            <div class="analysis-card">
+                <h3>Operational Excellence</h3>
+                <div class="chart-wrapper">
+                    <canvas id="operationalChart"></canvas>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Capacity Utilization</span>
+                    <span class="metric-value-small warning">54.3%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Service Delays</span>
+                    <span class="metric-value-small positive">1.09 min</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cancellation Rate</span>
+                    <span class="metric-value-small positive">8.7% (Excellent)</span>
+                </div>
+            </div>
+
+            <!-- Competitive Position -->
+            <div class="analysis-card">
+                <h3>Competitive Position</h3>
+                <div class="chart-wrapper">
+                    <canvas id="competitiveChart"></canvas>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Revenue Ranking</span>
+                    <span class="metric-value-small positive">75th percentile</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Campaign ROI Ranking</span>
+                    <span class="metric-value-small positive">95th percentile</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Service Quality Ranking</span>
+                    <span class="metric-value-small warning">40th percentile</span>
+                </div>
+            </div>
+
+            <!-- Partnership Health -->
+            <div class="analysis-card">
+                <h3>Partnership Health</h3>
+                <div class="chart-wrapper">
+                    <canvas id="healthChart"></canvas>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Overall Health Score</span>
+                    <span class="metric-value-small warning">7.2/10 (Yellow)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Outstanding Amount</span>
+                    <span class="metric-value-small negative">₹652.55</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Revenue Anomalies</span>
+                    <span class="metric-value-small warning">8 in 30 days</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Opportunity Section -->
+        <div class="opportunity-section">
+            <h2>Annual Revenue Opportunity: ₹2.16L+</h2>
+            <div class="opportunity-grid">
+                <div class="opportunity-metric">
+                    <h4>Capacity Optimization</h4>
+                    <div class="value">₹60K/month</div>
+                </div>
+                <div class="opportunity-metric">
+                    <h4>Online Channel Growth</h4>
+                    <div class="value">₹85K/month</div>
+                </div>
+                <div class="opportunity-metric">
+                    <h4>Campaign Optimization</h4>
+                    <div class="value">+25% ROI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <h2>Actionable Recommendations</h2>
+            
+            <div class="recommendation-group">
+                <h3>Immediate Actions (Next 7 days)</h3>
+                
+                <div class="recommendation-item high-priority">
+                    <div class="priority-badge high">HIGH</div>
+                    <div class="recommendation-content">
+                        <h4>Revenue Stabilization Program</h4>
+                        <p>Implement demand smoothing strategies to reduce 25.5% volatility. Expected impact: 40-50% volatility reduction.</p>
+                    </div>
+                </div>
+
+                <div class="recommendation-item high-priority">
+                    <div class="priority-badge high">HIGH</div>
+                    <div class="recommendation-content">
+                        <h4>Financial Housekeeping</h4>
+                        <p>Clear ₹652.55 outstanding amounts within 48 hours to improve partnership health score.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-group">
+                <h3>Strategic Initiatives (Next 30 days)</h3>
+                
+                <div class="recommendation-item medium-priority">
+                    <div class="priority-badge medium">MEDIUM</div>
+                    <div class="recommendation-content">
+                        <h4>Capacity Optimization Campaign</h4>
+                        <p>Target off-peak hours (40-42% utilization) for ₹60K monthly revenue uplift through strategic promotions.</p>
+                    </div>
+                </div>
+
+                <div class="recommendation-item medium-priority">
+                    <div class="priority-badge medium">MEDIUM</div>
+                    <div class="recommendation-content">
+                        <h4>Online Channel Acceleration</h4>
+                        <p>Increase online bookings from 40.1% to 60%+ target. Expected: ₹85K monthly revenue (340% ROI).</p>
+                    </div>
+                </div>
+
+                <div class="recommendation-item medium-priority">
+                    <div class="priority-badge medium">MEDIUM</div>
+                    <div class="recommendation-content">
+                        <h4>Service Quality Enhancement</h4>
+                        <p>Stabilize rating at 4.4+ through consistency protocols. Impact: ₹5K-8K monthly improvement.</p>
+                    </div>
+                </div>
+
+                <div class="recommendation-item">
+                    <div class="priority-badge">NORMAL</div>
+                    <div class="recommendation-content">
+                        <h4>"Aperitivo Hour" Launch</h4>
+                        <p>Target 4-6 PM slots with specialized offerings. Potential: ₹8K-12K daily uplift.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart configurations
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        maxTicksLimit: 5
+                    }
+                }
+            },
+            animation: {
+                duration: 750
+            }
+        };
+
+        // Revenue Analysis Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Pizza Palace', 'Peer Average'],
+                datasets: [{
+                    data: [26982, 21564],
+                    backgroundColor: ['#059669', '#94a3b8'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Daily Revenue Comparison (₹)'
+                    }
+                }
+            }
+        });
+
+        // Operational Excellence Chart
+        const operationalCtx = document.getElementById('operationalChart').getContext('2d');
+        new Chart(operationalCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Utilized', 'Underutilized'],
+                datasets: [{
+                    data: [54.3, 45.7],
+                    backgroundColor: ['#3b82f6', '#e2e8f0'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Capacity Utilization (%)'
+                    }
+                },
+                animation: {
+                    duration: 750
+                }
+            }
+        });
+
+        // Competitive Position Chart
+        const competitiveCtx = document.getElementById('competitiveChart').getContext('2d');
+        new Chart(competitiveCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Revenue', 'Campaign ROI', 'Service Quality', 'Bookings', 'Overall'],
+                datasets: [{
+                    label: 'Pizza Palace',
+                    data: [75, 95, 40, 52, 70],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 25
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Percentile Rankings'
+                    }
+                },
+                animation: {
+                    duration: 750
+                }
+            }
+        });
+
+        // Partnership Health Chart
+        const healthCtx = document.getElementById('healthChart').getContext('2d');
+        new Chart(healthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Current Score', 'Target Score'],
+                datasets: [{
+                    data: [7.2, 9.0],
+                    backgroundColor: ['#d97706', '#059669'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            maxTicksLimit: 5
+                        }
+                    }
+                },
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Health Score (out of 10)'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

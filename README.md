@@ -22,16 +22,16 @@ Review the comprehensive PRD with user stories, acceptance criteria, evaluation 
 Complete technical deep-dive into the multi-agent orchestration system, prompt engineering architecture, and broader vision for agentic AI workflows.
 
 ### 6. **Sample Output**
-- [artifacts/acad9e9a](artifacts/acad9e9a)
-    - [improvement_recommendations_R001.md](artifacts/acad9e9a/improvement_recommendations_R001.md)
-    - [evaluation_results.md](artifacts/acad9e9a/evaluation_results.md)
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
-    - [dashboard.html](artifacts/8e85652c/dashboard.html) (HTML Dashboard - download and open in browser. Quite raw, not evaluated yet)
+    - [dashboard.html](artifacts/8e85652c/dashboard.html) 
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
+    - [pizza_palace_dashboard.html](artifacts/fd0acfd4/pizza_palace_dashboard.html)
+
+(HTML Dashboards need to be downloaded and opened in browser. A bit raw, not evaluated yet - check the prompt here : [dashboard-generator.md](prompts/dashboard-generator.md))
 
 ### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
 Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
