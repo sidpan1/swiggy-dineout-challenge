@@ -1,48 +1,22 @@
-# Data Requirements and Mock Data Generation Process
-
-## Overview
-
-This document outlines the comprehensive data requirements for the Swiggy Dineout GenAI Co-Pilot Challenge and details the mock data generation process implemented in `init_database.py`. The data architecture is designed to support real-time performance analytics, peer benchmarking, and actionable insights generation for Sales Executives and Account Managers.
-
-## Data Source Classification Summary
-
-| Category | Data Source | Source | Implementation |
-|----------|-------------|---------|----------------|
-| **Enhanced Core** | Restaurant Master (with Profile Extensions) | Problem Statement + Business Requirements | Single consolidated table |
-| **Enhanced Core** | Restaurant Metrics | Problem Statement | Enhanced with business context columns |
-| **Enhanced Core** | Ads Data (with Financial Details) | Problem Statement + Business Requirements | Single consolidated table |
-| **Enhanced Core** | Peer Benchmarks | Problem Statement | Enhanced schema maintaining ID |
-| **Enhanced Core** | Discount History | Problem Statement | Enhanced schema maintaining ID |
-| **Extended (Operational Intelligence)** | Operational Metrics | Business Requirements | Standalone table |
-| **Extended (Service & Quality)** | Service Quality Tracking | Business Requirements | Standalone table |
-| **Extended (Financial & Competitive)** | Financial Settlements | Business Requirements | Standalone table |
-| **Extended (Financial & Competitive)** | Competitive Intelligence | Business Requirements | Standalone table |
-| **Extended (Performance Management)** | Revenue Volatility Tracking | Business Requirements | Standalone table |
-| **Extended (Performance Management)** | Performance Feedback Loop | Business Requirements | Standalone table |
-| **Extended (Performance Management)** | KPI Goals Tracking | Business Requirements | Standalone table |
-
+# Data Sources
 ## Data Architecture
 
 ### Core Data Entities
 
 The system is built around twelve data tables that capture comprehensive restaurant performance and business intelligence:
 
-**Core Tables**:
-1. **Restaurant Master** - Core restaurant information with enhanced profiling (includes veg/non-veg type, exclusivity status, parent type, seating capacity, NPS score)
-2. **Restaurant Metrics** - Daily performance tracking
-3. **Ads Data** - Campaign performance metrics with financial details (includes total investment, fund consumption rate, YoY/MoM changes, campaign category)
-4. **Peer Benchmarks** - Locality and cuisine-based averages
-5. **Discount History** - Promotional discount tracking
-
-**Extended Tables**:
-
-6. **Operational Metrics** - Hourly operational intelligence
-7. **Service Quality Tracking** - Customer satisfaction metrics
-8. **Financial Settlements** - Financial relationship tracking
-9. **Competitive Intelligence** - Market positioning analysis
-10. **Revenue Volatility Tracking** - Anomaly detection and stability monitoring
-11. **Performance Feedback Loop** - Sales team feedback integration
-12. **KPI Goals Tracking** - Goal setting and achievement monitoring
+1. `restaurant_master` - Core restaurant information with enhanced profiling (includes veg/non-veg type, exclusivity status, parent type, seating capacity, NPS score)
+2. `restaurant_metrics` - Daily performance tracking
+3. `ads_data` - Campaign performance metrics with financial details (includes total investment, fund consumption rate, YoY/MoM changes, campaign category)
+4. `peer_benchmarks` - Locality and cuisine-based averages
+5. `discount_history` - Promotional discount tracking
+6. `operational_metrics` - Hourly operational intelligence
+7. `service_quality_tracking` - Customer satisfaction metrics
+8. `financial_settlements` - Financial relationship tracking
+9. `competitive_intelligence` - Market positioning analysis
+10. `revenue_volatility_tracking` - Anomaly detection and stability monitoring
+11. `performance_feedback_loop` - Sales team feedback integration
+12. `kpi_goals_tracking` - Goal setting and achievement monitoring
 
 ### Entity Relationship Model
 
@@ -63,7 +37,7 @@ competitive_intelligence (standalone reference table - locality/cuisine based)
 
 ## Detailed Data Requirements
 
-### 1. Restaurant Master Data
+### 1. Restaurant Master Data (`restaurant_master`)
 
 **Purpose**: Serves as the central registry for all restaurant partners.
 
@@ -90,7 +64,7 @@ competitive_intelligence (standalone reference table - locality/cuisine based)
 - Locality names should be standardized
 - Cuisine categories should follow a controlled vocabulary
 
-### 2. Restaurant Performance Metrics
+### 2. Restaurant Performance Metrics (`restaurant_metrics`)
 
 **Purpose**: Tracks daily operational performance for trend analysis.
 
@@ -117,7 +91,7 @@ competitive_intelligence (standalone reference table - locality/cuisine based)
 - **Cover Multiplier**: Average party size indicator
 - **Revenue**: Direct business value metric
 
-### 3. Advertising Campaign Data (Enhanced with Financial Details)
+### 3. Advertising Campaign Data (`ads_data`)
 
 **Purpose**: Measures marketing effectiveness and ROI with comprehensive financial tracking.
 
@@ -146,7 +120,7 @@ competitive_intelligence (standalone reference table - locality/cuisine based)
 ROI = revenue_generated / spend
 ```
 
-### 4. Peer Benchmark Data
+### 4. Peer Benchmark Data (`peer_benchmarks`)
 
 **Purpose**: Enables comparative analysis within similar restaurant cohorts.
 
@@ -172,7 +146,7 @@ ROI = revenue_generated / spend
 - Average revenue
 - Average rating
 
-### 5. Discount History
+### 5. Discount History (`discount_history`)
 
 **Purpose**: Tracks promotional effectiveness over time.
 
@@ -195,7 +169,7 @@ ROI = revenue_generated / spend
 
 ---
 
-### 6. Operational Metrics
+### 6. Operational Metrics (`operational_metrics`)
 
 **Purpose**: Granular operational intelligence for efficiency optimization and capacity management.
 
@@ -213,7 +187,7 @@ ROI = revenue_generated / spend
 | `offline_bookings` | INTEGER | Traditional channel performance | Channel balance optimization strategies |
 | `service_delay_minutes` | REAL | Operational efficiency indicator | Quality improvement action planning |
 
-### 7. Service Quality Tracking
+### 7. Service Quality Tracking (`service_quality_tracking`)
 
 **Purpose**: Customer satisfaction monitoring and service excellence measurement.
 
@@ -229,7 +203,7 @@ ROI = revenue_generated / spend
 | `complaint_categories` | TEXT/JSON | Specific issue classification | Targeted improvement recommendations |
 | `resolution_time_hours` | REAL | Response efficiency metric | Customer service excellence measurement |
 
-### 8. Financial Settlements
+### 8. Financial Settlements (`financial_settlements`)
 
 **Purpose**: Financial relationship tracking and cash flow management.
 
@@ -244,7 +218,7 @@ ROI = revenue_generated / spend
 | `processing_time_days` | INTEGER | Operational efficiency metric | Service quality indicator for financial operations |
 | `outstanding_amount` | REAL | Pending obligations | Financial health and relationship stress indicator |
 
-### 9. Competitive Intelligence
+### 9. Competitive Intelligence (`competitive_intelligence`)
 
 **Purpose**: Market positioning and competitive landscape analysis.
 
@@ -261,7 +235,7 @@ ROI = revenue_generated / spend
 | `price_positioning` | TEXT | Price tier classification | Pricing strategy recommendations |
 | `competitive_advantage_score` | REAL | Calculated advantage metric | Unique selling proposition identification |
 
-### 10. Revenue Volatility Tracking
+### 10. Revenue Volatility Tracking (`revenue_volatility_tracking`)
 
 **Purpose**: Revenue stability monitoring and anomaly detection for proactive intervention.
 
@@ -277,7 +251,7 @@ ROI = revenue_generated / spend
 | `volatility_trend_7d` | REAL | Short-term volatility trend | Immediate intervention assessment |
 | `volatility_trend_30d` | REAL | Medium-term volatility trend | Strategic stability evaluation |
 
-### 11. Performance Feedback Loop
+### 11. Performance Feedback Loop (`performance_feedback_loop`)
 
 **Purpose**: Sales team feedback integration and continuous improvement tracking.
 
@@ -293,7 +267,7 @@ ROI = revenue_generated / spend
 | `feedback_notes` | TEXT | Qualitative observations | Contextual insights and specific issues |
 | `action_items` | JSON | Structured follow-up tasks | Actionable improvement tracking |
 
-### 12. KPI Goals Tracking
+### 12. KPI Goals Tracking (`kpi_goals_tracking`)
 
 **Purpose**: Goal setting and achievement monitoring for sales team performance management.
 
@@ -309,141 +283,21 @@ ROI = revenue_generated / spend
 | `goal_phase` | TEXT | Goal timeline segmentation | Phased goal achievement tracking |
 | `achievement_percentage` | REAL | Performance ratio | Success rate measurement and recognition |
 
-## Mock Data Generation Strategy
+## Querying
 
-### 1. Data Volume and Distribution
+### Database Connection
 
-**Enhanced Core Data (Consolidated)**:
-- 8 restaurants across 3 cities with diverse performance personalities (enhanced with profile extensions)
-- 31 days of daily metrics per restaurant (248 total records)
-- 2-4 ad campaigns per restaurant with financial details (26 total campaigns)
-- 42 locality-cuisine benchmark combinations
-- 1-3 discount periods per restaurant (11 total discount periods)
+The database connection details are stored in the session context. Always read the session context to get the correct database URL and the type of database.
 
-**Extended Data (Advanced Business Intelligence)**:
-- 31 days × 12 hours × 8 restaurants = 2,976 operational metrics records
-- 31 days × 8 restaurants = 248 service quality tracking records
-- 5-15 financial settlement records per restaurant (65 total)
-- 126 competitive intelligence records (locality-cuisine-capacity combinations)
-- 31 days × 8 restaurants = 248 revenue volatility tracking records
-- 10-30 performance feedback records (22 total)
-- 20 KPI goal tracking records across restaurants and periods (160 total)
+### Example Queries (SQLite)
+Use sqlite bash tool to query the database with the URL from session context:
 
-**Total Records**: 4,180 records across 12 consolidated tables
+```bash
+# Example: Query ads data for restaurant R001
+sqlite3 {db_url_from_session} "SELECT restaurant_id, campaign_id, spend, total_investment, campaign_category FROM ads_data WHERE restaurant_id = 'R001' LIMIT 2;"
 
-### 2. Realistic Data Patterns
-
-#### Restaurant Performance Patterns
-```python
-# Base performance with daily variations
-base_bookings = random.randint(8, 25)  # Restaurant-specific baseline
-daily_bookings = base_bookings + random.randint(-5, 8)  # Daily fluctuation
-
-# Realistic cancellation rates (5-15%)
-cancellations = int(bookings * random.uniform(0.05, 0.15))
-
-# Cover multiplier (2-4 people per booking)
-covers = bookings * random.randint(2, 4)
+# Example: Get restaurant performance metrics
+sqlite3 {db_url_from_session} "SELECT restaurant_id, date, bookings, revenue, avg_rating FROM restaurant_metrics WHERE restaurant_id = 'R001' ORDER BY date DESC LIMIT 5;"
 ```
 
-#### Ad Campaign Patterns
-```python
-# Realistic funnel metrics
-CTR = 5-12%  # Click-through rate from impressions
-Conversion Rate = 6-15%  # Booking rate from clicks
-
-# Campaign types reflecting real scenarios
-campaign_types = ['visibility_boost', 'weekend_special', 'lunch_deals', 'dinner_prime']
-```
-
-### 3. Data Consistency Rules
-
-1. **Temporal Consistency**: All dates are generated relative to current date
-2. **Metric Relationships**: Revenue = covers × avg_spend_per_cover
-3. **Rating Constraints**: Ratings bounded between 1.0 and 5.0
-4. **Foreign Key Integrity**: All references to restaurant_id are valid
-
-### 4. Business Logic Embedded in Mock Data
-
-#### Performance Variations
-- Restaurants have consistent "personality" (base metrics)
-- Daily variations simulate real-world fluctuations
-- Rating variations are small (±0.3) to reflect stability
-
-#### Campaign Effectiveness
-- Higher spend generally correlates with more impressions
-- Conversion rates vary by campaign type (implicit)
-- ROI ranges from 2.2x to 3.8x (profitable campaigns)
-
-#### Discount Impact
-- Discount percentages range from 5% to 25%
-- ROI from discounts (2.0x to 4.2x) shows positive impact
-
-## Data Quality Assurance
-
-### 1. Validation Rules
-
-- **Unique Constraints**: (restaurant_id, date) for metrics, (restaurant_id, campaign_id) for ads
-- **Check Constraints**: Ratings between 1.0 and 5.0
-- **Foreign Key Constraints**: All restaurant_id references validated
-- **Non-negative Values**: All counts and monetary values ≥ 0
-
-### 2. Data Completeness
-
-- Every restaurant has 31 days of metrics
-- Every restaurant has at least 2 ad campaigns
-- All locality-cuisine combinations have benchmarks
-- No null values in required fields
-
-### 3. Business Rule Compliance
-
-- Cancellations never exceed bookings
-- Revenue calculations are consistent
-- Campaign dates don't overlap for same restaurant
-- Discount periods are realistic (2-6 weeks)
-
-## Future Enhancements
-
-### 1. Customer Intelligence
-- Customer demographics and segmentation
-- Repeat booking rate and customer lifetime value
-- Customer journey mapping and touchpoint analysis
-- Customer preference and behavior patterns
-
-### 2. Menu and Product Intelligence
-- Menu item performance and profitability
-- Seasonal menu optimization
-- Price elasticity analysis
-- Cross-selling and upselling opportunities
-
-### 3. Advanced Analytics
-- Weather impact correlations
-- Event-based demand forecasting
-- Dynamic pricing optimization
-- Predictive maintenance for restaurant equipment
-
-### 4. Real-time Capabilities
-- Streaming data ingestion from POS systems
-- Live dashboard updates and alerts
-- Real-time capacity management
-- Dynamic benchmarking with live peer data
-
-### 5. External Data Integration
-- Social media sentiment analysis
-- Local event calendars and impact analysis
-- Economic indicators and market trends
-- Supply chain and vendor performance data
-
-## Conclusion
-
-The consolidated data architecture strategically combines core data sources with extended business intelligence capabilities through optimized table design. This evolution from basic performance tracking to comprehensive business intelligence creates a robust, efficient foundation for:
-
-1. **Enhanced Sales Conversations**: Consolidated restaurant profiling in restaurant_master enables more targeted and relevant sales strategies
-2. **Comprehensive Campaign Analysis**: Financial details integrated into ads_data provide complete campaign performance view
-3. **Operational Excellence**: Granular operational metrics support precise optimization recommendations
-4. **Proactive Relationship Management**: Service quality and volatility monitoring enable proactive intervention
-5. **Competitive Positioning**: Market intelligence supports strategic positioning and differentiation
-6. **Continuous Improvement**: Feedback loops and goal tracking ensure evolving relationship optimization
-7. **Database Efficiency**: Strategic consolidation reduces complexity while maintaining all capabilities
-
-The mock data generation process creates realistic, self-consistent datasets across 12 consolidated tables with 4,180+ records, enabling comprehensive testing of AI-powered insights that can meaningfully impact sales effectiveness and drive sustainable business growth for restaurant partners. The optimized data model transforms basic reporting into strategic business intelligence while improving database performance and maintainability, positioning sales teams for more consultative and value-driven customer relationships.
+**Note**: Replace `{db_url_from_session}` with the actual database URL from the session context.

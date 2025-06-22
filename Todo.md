@@ -1,10 +1,10 @@
 - [ ] Gather and categorise feedback
-- [ ] Build a PRD for agentic workflow
-- [ ] Extend dataset for new use cases
+- [x] Build a PRD for agentic workflow
+- [x] Extend dataset for new use cases
 - [ ] Create a MVP system architecture
 - [ ] Create long term system architecture
-- [ ] Build deep agent
-- [ ] Add abtraction builder functionality
-- [ ] Add basic evals
+- [x] Build deep agent
+- [x] Add abtraction builder functionality
+- [x] Add basic evals
 - [ ] Add GUI functionality
 - [ ] Documentation for submission
