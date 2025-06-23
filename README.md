@@ -44,9 +44,9 @@ These are the specialized prompts that define agent roles and workflows:
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
     - [dashboard.html](artifacts/8e85652c/dashboard.html) 
-- [artifacts/8e85652c](artifacts/8e85652c)
-    - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
-    - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
+- [artifacts/fd0acfd4](artifacts/fd0acfd4)
+    - [restaurant_performance_briefing_R002.md](artifacts/fd0acfd4/restaurant_performance_briefing_R002.md)
+    - [evaluation_results.md](artifacts/fd0acfd4/evaluation_results.md)
     - [pizza_palace_dashboard.html](artifacts/fd0acfd4/pizza_palace_dashboard.html)
 
 (HTML Dashboards need to be downloaded and opened in browser. A bit raw, not evaluated yet - check the prompt here : [dashboard-generator.md](prompts/dashboard-generator.md))
