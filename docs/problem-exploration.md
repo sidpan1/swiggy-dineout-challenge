@@ -37,18 +37,20 @@ What if all business processes could be written in natural language and then com
 
 **Enter LLMs** : LLMs are great at generating text, but that is not their only strength. They are also great at calling tools to gather context, reasoning, and finally calling other tools to take actions. These LLMs when stationed in an environment where they can sense the environment state & events, reason about the current context and take actions towards a goal also known as agentic systems, can be used to build intelligent workflows which can be used to augment human decision making. These workflows are no different from natural language SOPs which are written by humans, for humans, with the only difference being that they are executed by an agentic system. Agents bridge the gap between business intent and technical implementation, making workflows transparent, auditable, and easily modifiable by business users.
 
-# Business Value
-The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective. Business users can now focus on the strategic business logic and let the agentic system take care of the rest.
-
 Further with time, LLMs will be
 
 1. Better at reasoning
 2. Better at following instructions
 3. Increased in context window size
 4. Cheaper to run
-5. Reliable to run asynchronously over increasing amount of time
+5. Decreased latency
+6. Reliable to run asynchronously over increasing amount of time
+7. Available to self-host and run on-premise (smaller models specialized for specific tasks)
 
 Hence it is inevitable that most of knowledge work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems. 
+
+# Business Value
+The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective. Business users can now focus on the strategic business logic and let the agentic system take care of the rest.
 
 This is a win-win for the business and the business users.
 
