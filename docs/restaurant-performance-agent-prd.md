@@ -133,28 +133,16 @@ With the understanding that recommendations must align with the partner's season
 - **Data Sources**: Mock datasets for MVP development; production integration requires data governance approval across 14 extended data tables including operational metrics, service quality, and financial intelligence
 - **Competitive Intelligence Ethics**: Clear guidelines on appropriate use of peer benchmarking data and competitive positioning insights in partner conversations
 
-## 9. Sales-Optimized Success Metrics & KPIs
+## 9. Success Metrics
 
-### Primary Business Impact Metrics (3-Month Targets)
-- **Revenue Growth Acceleration**: 25% increase in average monthly revenue growth across agent-supported restaurant accounts
-- **Account Management Efficiency**: 75% reduction in meeting preparation time (from 90 minutes to 20 minutes average)
-- **Partnership Retention**: 95% retention rate for agent-supported accounts vs 88% baseline
-- **Upsell Success Rate**: 40% success rate on agent-recommended upsell opportunities vs 25% baseline
+### Business Impact Metrics (mock numbers)
+- **Revenue Growth**: 25% increase in monthly revenue growth across agent-supported accounts
+- **Partnership Retention**: 95% retention rate vs 88% baseline
+- **Upsell Success**: 40% success rate on recommended opportunities vs 25% baseline
+- **Campaign ROI**: 30% improvement in average ROI through optimizations
 
-### Sales Performance Enhancement Metrics (6-Month Targets)
-- **Campaign ROI Optimization**: 30% improvement in average campaign ROI through agent-recommended optimizations
-- **Risk Mitigation Effectiveness**: 85% of flagged high-risk accounts successfully stabilized through early intervention
-- **Competitive Win Rate**: 60% success rate in competitive defense scenarios using agent insights vs 45% baseline
-- **Partner Satisfaction**: 90% of partners rate agent-supported account management as "highly valuable"
-
-### Operational Excellence Indicators (Monthly)
-- **Insight Accuracy**: >90% accuracy on revenue projections and risk assessments validated against actual outcomes
-- **Recommendation Adoption**: 80% of agent recommendations implemented by sales team within 30 days
-- **Early Warning Effectiveness**: 72-hour advance notice on 85% of critical account issues
-- **Data Coverage**: Complete intelligence profiles for 95% of active restaurant accounts
-
-### Advanced Sales Intelligence Metrics (Quarterly)
-- **Market Intelligence Quality**: 90% correlation between agent competitive assessments and independent market analysis
-- **Strategic Planning Support**: Agent insights incorporated in 85% of quarterly business reviews
-- **Partnership Growth Velocity**: 20% faster time-to-revenue on new partnership optimization initiatives
-- **Sales Team Confidence**: 85% of sales executives comfortable presenting agent insights directly to partners
+### Product Performance Metrics (mock numbers)
+- **Time Savings**: 70 minutes saved per meeting × 100 meetings/month = 116 hours/month saved
+- **Insight Accuracy**: >90% accuracy on revenue projections and risk assessments
+- **Recommendation Adoption**: 80% of recommendations implemented within 30 days
+- **Partner Satisfaction**: 90% rate agent-supported management as "highly valuable"
