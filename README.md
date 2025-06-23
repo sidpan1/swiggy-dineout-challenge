@@ -21,7 +21,25 @@ Multi-agent orchestration system with 5 specialized analysts coordinated by a Se
 ### 5. **Data Requirements & Generation** → [`docs/data-requirements-and-generation.md`](docs/data-requirements-and-generation.md)
 Detailed 12-table database schema with 4,180+ realistic records, including restaurant "personalities" that drive authentic performance patterns for AI analysis.
 
-### 6. **Sample Output**
+### 6. **System Prompts** → [`prompts/`](prompts/)
+These are the specialized prompts that define agent roles and workflows:
+
+- **[orchestration.md](prompts/orchestration.md)** - Senior Sales Manager coordinating specialized analyst team
+- **[analysis-categories.md](prompts/analysis-categories.md)** - Five specialist analyst roles (booking, revenue, risk, campaigns, competitive)
+- **[data-sources.md](prompts/data-sources.md)** - 12-table database schema and data architecture
+- **[artifacts-protocol.md](prompts/artifacts-protocol.md)** - Structured output standardization and institutional knowledge building
+- **[output-format.md](prompts/output-format.md)** - Sales briefing document format specification
+- **[dashboard-generator.md](prompts/dashboard-generator.md)** - Interactive HTML dashboard creation from analytical reports
+- **[instructions.md](prompts/instructions.md)** - Core system objectives and autonomous operation guidelines
+
+### Development & Tools
+- **[tools.md](prompts/tools.md)** - Tool execution documentation using UV package management
+- **[tools-build.md](prompts/tools-build.md)** - Reusable tool construction philosophy and guidelines
+
+### Quality Assurance
+- **[evaluation/evaluate-solution.md](prompts/evaluation/evaluate-solution.md)** - Systematic assessment framework with quantitative scoring
+
+### 7. **Sample Output**
 - [artifacts/8e85652c](artifacts/8e85652c)
     - [restaurant_performance_briefing_R001_20241222.md](artifacts/8e85652c/restaurant_performance_briefing_R001_20241222.md)
     - [evaluation_results.md](artifacts/8e85652c/evaluation_results.md)
@@ -33,7 +51,7 @@ Detailed 12-table database schema with 4,180+ realistic records, including resta
 
 (HTML Dashboards need to be downloaded and opened in browser. A bit raw, not evaluated yet - check the prompt here : [dashboard-generator.md](prompts/dashboard-generator.md))
 
-### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
+### 8. **Run the System** → [Quick Start Guide](#quick-start) (below)
 Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
 
 ## Limitations
@@ -50,25 +68,6 @@ This POC is a proof of concept and there are a lot of limitations.
 - No deployment pipeline is implemented for cloud deployment.
 - The system is not built to be scalable across multiple instances.
 - A subset of the final system architecture is implemented in this POC.
-
-## System Prompts
-
-The AI system is powered by specialized prompts that define agent roles and workflows:
-
-- **[orchestration.md](prompts/orchestration.md)** - Senior Sales Manager coordinating specialized analyst team
-- **[analysis-categories.md](prompts/analysis-categories.md)** - Five specialist analyst roles (booking, revenue, risk, campaigns, competitive)
-- **[data-sources.md](prompts/data-sources.md)** - 12-table database schema and data architecture
-- **[artifacts-protocol.md](prompts/artifacts-protocol.md)** - Structured output standardization and institutional knowledge building
-- **[output-format.md](prompts/output-format.md)** - Sales briefing document format specification
-- **[dashboard-generator.md](prompts/dashboard-generator.md)** - Interactive HTML dashboard creation from analytical reports
-- **[instructions.md](prompts/instructions.md)** - Core system objectives and autonomous operation guidelines
-
-### Development & Tools
-- **[tools.md](prompts/tools.md)** - Tool execution documentation using UV package management
-- **[tools-build.md](prompts/tools-build.md)** - Reusable tool construction philosophy and guidelines
-
-### Quality Assurance
-- **[evaluation/evaluate-solution.md](prompts/evaluation/evaluate-solution.md)** - Systematic assessment framework with quantitative scoring
 
 **Disclaimer** : I used AI (Claude Code) heavily to work on this project. This however does not mean the ideas presented in this project are not my own. I operated at a higher order abstraction, i.e. at the strategic level of the problem, and delegated the operational level to AI.
 
