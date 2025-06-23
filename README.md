@@ -58,13 +58,14 @@ Try the system yourself with the provided commands to see the AI-powered briefin
 This POC is a proof of concept and there are a lot of limitations.
 
 - Currently it takes about 10 mins and ~ $3 to generate a briefing for a restaurant, there is a lot of room for optimization.
+- Currently the agent does not plan then execute - the accuracy will likely increase when we do that.
 - The use cases and prompts generated are basic and built through intuition and exploration with AI. They are not validated by domain experts.
-- The evaluations implemented are very basic and not comprehensive, they would need refining based on context from the domain experts.
+- The evaluations implemented are very basic and not comprehensive, they would need refining based on context from the domain experts. Further there is only an evaluation for the end step, not sub-steps.
 - Currently the agent directly queries the database by constructing SQL queries on the fly, these can be abstracted by a layer of data access tools. (Raw access can still be provided if needed for edge cases)
 - The system has no guardrails to prevent hallucinations and policy violations.
 - The agents are not built to work with multi-LLM providers as of now (since I had a Claude Max subscription and wanted to use it), but it can be easily extended to work with other LLM providers.
 - We don't use an LLM gateway to route requests to the appropriate LLM based on the request as of now.
-- The system is not well observable, there isn't adequate tracing and monitoring.
+- The system is not well observable, there isn't tracing and monitoring integrated.
 - No deployment pipeline is implemented for cloud deployment.
 - The system is not built to be scalable across multiple instances.
 - Access control is not implemented across the data access layer.
@@ -74,7 +75,7 @@ This POC is a proof of concept and there are a lot of limitations.
 ## Disclaimer
 I used AI (Claude Code) heavily to work on this project. This however does not mean the ideas presented in this project are not my own. I operated at a higher order abstraction, i.e. at the strategic level of the problem, and delegated the operational level to AI.
 
-Some of it was completely done by AI (for example, the data generation), while for the most of the other parts I prompted high level ideas, continued staying in the loop, worked through multiple iterations, and reviewed the code/prompts to ensure the output was as expected.
+Some of the tasks was completely done by AI (for example, the data generation), while for the most of the other parts I prompted high level ideas, continued staying in the loop, worked through multiple iterations, and reviewed the code/prompts to ensure the output was as expected.
 
 ---
 
