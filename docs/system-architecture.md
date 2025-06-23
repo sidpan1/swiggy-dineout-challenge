@@ -184,10 +184,13 @@ These tools could be:
 
 Claude is the LLM of choice and Claude Code as the augmented LLM for this in this POC. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
 
-Having an LLM running in a loop natively in the terminal console with access to bash and the file system seems like a new layer abstraction on top of the operating system, where you do not directly interact with the operating system, but rather with the LLM in natural language.
+Having an LLM running in a loop natively in the terminal console with access to bash and the file system seems like a new layer abstraction on top of the operating system, where you do not directly interact with the operating system, but rather with the LLM in natural language. It is like a personal SWE assistant with its own separate workspace and tools to help you get anything done. This is such a low-level primitive that it can be applied to any business domain. 
 
 > Note:
-> The current implementation uses Claude Code as the augmented LLM. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future. 
+> The current implementation uses Claude Code as the augmented LLM. However, the architecture is agnostic to it and it can be replaced with any other LLM provider if needed through changes in a single file. There are other similar CLI Augmented LLMs which can work with any LLM provider, which would be the choice for the future, for example:
+> - [OpenAI Codex CLI](https://github.com/openai/codex) - Lightweight coding agent that runs in your terminal
+> - [Aider](https://aider.chat/) - AI pair programming in your terminal with multi-LLM support
+> - [Open Codex](https://github.com/codingmoh/open-codex) - Fully open-source command-line AI assistant supporting local language models
 
 ### 2. Natural Language Prompts
 
