@@ -48,6 +48,7 @@ This POC is a proof of concept and there are a lot of limitations.
 - We don't use an LLM gateway to route requests to the appropriate LLM based on the request as of now.
 - The system is not well observable, there isn't adequate tracing and monitoring.
 - No deployment pipeline is implemented for cloud deployment.
+- The system is not built to be scalable across multiple instances.
 - A subset of the final system architecture is implemented in this POC.
 
 ---
