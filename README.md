@@ -7,7 +7,7 @@ An AI-powered co-pilot that generates sales intelligence briefings for restauran
 Follow this guided tour to understand the solution architecture and technical approach:
 
 ### 1. **Problem Statement** → [`docs/problem-statement.md`](docs/problem-statement.md)
-Build an AI-powered Co-Pilot that generates structured performance summaries for restaurant partners.
+Original Problem Statement: Build an AI-powered Co-Pilot that generates structured performance summaries for restaurant partners.
 
 ### 2. **Problem Exploration** → [`docs/problem-exploration.md`](docs/problem-exploration.md)  
 Explores the broader vision of replacing fragmented business processes with unified natural language workflows that can be compiled into code and executed by agentic systems.
@@ -50,6 +50,25 @@ This POC is a proof of concept and there are a lot of limitations.
 - No deployment pipeline is implemented for cloud deployment.
 - The system is not built to be scalable across multiple instances.
 - A subset of the final system architecture is implemented in this POC.
+
+## System Prompts
+
+The AI system is powered by specialized prompts that define agent roles and workflows:
+
+- **[orchestration.md](prompts/orchestration.md)** - Senior Sales Manager coordinating specialized analyst team
+- **[analysis-categories.md](prompts/analysis-categories.md)** - Five specialist analyst roles (booking, revenue, risk, campaigns, competitive)
+- **[data-sources.md](prompts/data-sources.md)** - 12-table database schema and data architecture
+- **[artifacts-protocol.md](prompts/artifacts-protocol.md)** - Structured output standardization and institutional knowledge building
+- **[output-format.md](prompts/output-format.md)** - Sales briefing document format specification
+- **[dashboard-generator.md](prompts/dashboard-generator.md)** - Interactive HTML dashboard creation from analytical reports
+- **[instructions.md](prompts/instructions.md)** - Core system objectives and autonomous operation guidelines
+
+### Development & Tools
+- **[tools.md](prompts/tools.md)** - Tool execution documentation using UV package management
+- **[tools-build.md](prompts/tools-build.md)** - Reusable tool construction philosophy and guidelines
+
+### Quality Assurance
+- **[evaluation/evaluate-solution.md](prompts/evaluation/evaluate-solution.md)** - Systematic assessment framework with quantitative scoring
 
 ---
 
