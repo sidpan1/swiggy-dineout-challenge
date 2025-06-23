@@ -156,9 +156,17 @@ The system contains several recursive loops:
 However, it would not be possible to build this entire system from scratch in scope of this project. This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
 
 ## Agentic Workflow : Curent Components and Implementation
-We try to keep the architecture as simple as possible, and complexity be introduced only when there is a need. For example, the first version of an agentic workflow might be entirely LLM-driven, while future versions are optimized to be partially deterministic based on the use case. This is to avoid complexity in the beginning where requirements are not that clear. And as we get to know more of the unknowns, we can optimize the workflow to be more deterministic and efficient.
+We try to keep the architecture as simple as possible, and complexity be introduced only when there is a need. For example, the first version of an agentic workflow might be entirely LLM-driven, while future versions are optimized to be partially deterministic based on the use case.
 
-These are some of the basic components that we need. 
+This has some benefits. 
+
+1. It helps avoid complexity in the beginning where requirements are not that clear.
+2. It helps discover capabilities which would be not possible if we fix on a rigid hardcoded workflow prematurely. 
+3. It helps domain experts in the complete transparency of the control flow and the prompts used and experiment with them. 
+
+As we get to know more of the unknowns, we can optimize the workflow to be more deterministic and efficient.
+
+These are some of the basic components that we need to build such a workflow. 
 
 ![Components](./images/components.svg)
 
