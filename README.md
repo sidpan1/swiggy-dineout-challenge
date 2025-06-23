@@ -63,7 +63,7 @@ This POC is a proof of concept and there are a lot of limitations.
 - The use cases and prompts generated are basic and built through intuition and exploration with AI. They are not validated by domain experts.
 - The evaluations implemented are very basic and not comprehensive, they would need refining based on context from the domain experts. Further there is only an evaluation for the end step, not sub-steps.
 - Currently the agent directly queries the database by constructing SQL queries on the fly, these can be abstracted by a layer of data access tools. (Raw access can still be provided if needed for edge cases)
-- The system has no guardrails to prevent hallucinations and policy violations.
+- The system has no guardrails to prevent hallucinations, policy violations and prompt injections.
 - The agents are not built to work with multi-LLM providers as of now (since I had a Claude Max subscription and wanted to use it), but it can be easily extended to work with other LLM providers.
 - We don't use an LLM gateway to route requests to the appropriate LLM based on the request as of now.
 - The system is not well observable, there isn't tracing and monitoring integrated.
