@@ -133,11 +133,33 @@ python main.py evaluate --session-id acad9e9a
 │   ├── orchestration.md   # Multi-agent coordination
 │   ├── analysis-categories.md  # Specialist analyst roles
 │   ├── data-sources.md    # Available data tables
-│   └── evaluation/        # Assessment prompts
-├── tools/                 # Utilities and evaluation
-│   ├── utils/            # Session management, DB operations
-│   └── evaluation/       # Quality assessment tools
-├── docs/                 # Technical documentation
-└── .artifacts/           # Generated session outputs
+│   ├── artifacts-protocol.md   # Output standardization
+│   ├── dashboard-generator.md  # HTML dashboard creation
+│   ├── instructions.md    # General system instructions
+│   ├── output-format.md   # Report formatting guidelines
+│   ├── tools-build.md     # Tool construction prompts
+│   ├── tools.md          # Available tool definitions
+│   └── evaluation/       # Assessment prompts
+│       └── evaluate-solution.md
+├── tools/                # Utilities and evaluation
+│   ├── utils/           # Session management, DB operations
+│   │   ├── get_tools.py
+│   │   ├── init_database.py
+│   │   └── initialize_session.py
+│   └── evaluation/      # Quality assessment tools
+│       ├── get_trends.py
+│       ├── initialize_db.py
+│       └── save_score.py
+├── docs/                # Technical documentation
+│   ├── data-requirements-and-generation.md
+│   ├── problem-exploration.md
+│   ├── problem-statement.md
+│   ├── restaurant-performance-agent-prd.md
+│   ├── system-architecture.md
+│   ├── images/          # Architecture diagrams
+│   └── external/        # External documentation
+├── artifacts/           # Generated session outputs
+├── logs/               # System execution logs
+└── pyproject.toml      # UV package management
 ```
 
