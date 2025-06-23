@@ -71,7 +71,8 @@ This POC is a proof of concept and there are a lot of limitations.
 - The current persistence layer is sqlite, which is not scalable and not suitable for production.
 - A subset of the final system architecture is implemented in this POC.
 
-**Disclaimer** : I used AI (Claude Code) heavily to work on this project. This however does not mean the ideas presented in this project are not my own. I operated at a higher order abstraction, i.e. at the strategic level of the problem, and delegated the operational level to AI.
+## Disclaimer
+I used AI (Claude Code) heavily to work on this project. This however does not mean the ideas presented in this project are not my own. I operated at a higher order abstraction, i.e. at the strategic level of the problem, and delegated the operational level to AI.
 
 Some of it was completely done by AI (for example, the data generation), while for the most of the other parts I prompted high level ideas, continued staying in the loop, worked through multiple iterations, and reviewed the code/prompts to ensure the output was as expected.
 
