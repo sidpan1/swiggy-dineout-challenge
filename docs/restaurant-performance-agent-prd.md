@@ -81,7 +81,7 @@ With the understanding that recommendations must align with the partner's season
 ## 3. Bounded Acceptance Criteria
 
 ### Must (Hard Requirements)
-- Generate comprehensive sales briefing within 30 seconds of restaurant_id input
+- Generate comprehensive sales briefing within 10 minutes of restaurant_id input
 - Achieve ≥85% accuracy on financial metrics (revenue, ROI, settlement patterns) and ≥90% accuracy on operational metrics (bookings, capacity utilization)
 - Return structured output optimized for sales conversations with executive summary, key talking points, and specific action items
 - Provide risk scoring (High/Medium/Low) for relationship health based on revenue volatility, service quality trends, and competitive pressure
