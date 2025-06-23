@@ -33,12 +33,12 @@ This fragmented and disintegrated approach creates several critical business pro
 ## Conceptual Solution
 What if all business processes could be written in natural language and then compiled into code wherever execution is needed? This code would be extended and reviewed by software engineers before merged into the main codebase. Further code would also be reconciled back to the natural language definition continuously. 
 
+![human-ai-interaction.svg](./images/human-ai-interaction.svg)
+
 **Enter LLMs** : LLMs are great at generating text, but that is not their only strength. They are also great at calling tools to gather context, reasoning, and finally calling other tools to take actions. These LLMs when stationed in an environment where they can sense the environment state & events, reason about the current context and take actions towards a goal also known as agentic systems, can be used to build intelligent workflows which can be used to augment human decision making. These workflows are no different from natural language SOPs which are written by humans, for humans, with the only difference being that they are executed by an agentic system. Agents bridge the gap between business intent and technical implementation, making workflows transparent, auditable, and easily modifiable by business users.
 
 # Business Value
 The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective. Business users can now focus on the strategic business logic and let the agentic system take care of the rest.
-
-![human-ai-interaction.svg](./images/human-ai-interaction.svg)
 
 Further with time, LLMs will be
 
