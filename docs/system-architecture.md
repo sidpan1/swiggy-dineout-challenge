@@ -137,21 +137,6 @@ Agentic workflows are self-improving AI systems where agents continuously refine
   - Incrementally improve performance for specific use cases
 - Technical experts attest the gains made through these experiments and approve the changes.
 
-## Feedback and Improvement Loops
-
-The system contains several recursive loops:
-
-1. **Primary Improvement Loop**: The circular flow in the center represents continuous improvement where outputs feed back as inputs
-
-2. **Human-in-the-Loop Validation**: Multiple approval points ensure quality:
-   - Product Owner approval (business alignment)
-   - Domain Expert approval (technical correctness)
-   - "Expert" approval (specialized validation)
-
-3. **Data Labeling Loop**: End users, product owners, domain experts, or third-party humans label data based on guidelines, feeding back into the system
-
-4. **Self-Evolution Loop**: The system can modify its own code, prompts, and workflows based on performance metrics
-
 ## Current Implementation Scope
 However, it would not be possible to build this entire system from scratch in scope of this project. This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
 
