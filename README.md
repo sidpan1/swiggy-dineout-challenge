@@ -59,6 +59,7 @@ This POC is a proof of concept and there are a lot of limitations.
 
 - Currently it takes about 10 mins and ~ $3 to generate a briefing for a restaurant, there is a lot of room for optimization.
 - Currently the agent does not plan then execute - the accuracy will likely increase when we do that.
+- The agent does look into previously generated data/reports to generate the report. However this could be integrated by providing an LLM with a tool which can read previous reports.
 - The use cases and prompts generated are basic and built through intuition and exploration with AI. They are not validated by domain experts.
 - The evaluations implemented are very basic and not comprehensive, they would need refining based on context from the domain experts. Further there is only an evaluation for the end step, not sub-steps.
 - Currently the agent directly queries the database by constructing SQL queries on the fly, these can be abstracted by a layer of data access tools. (Raw access can still be provided if needed for edge cases)
