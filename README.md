@@ -36,7 +36,7 @@ Multi-agent orchestration system with 5 specialized analysts coordinated by a Se
 ### 7. **Run the System** → [Quick Start Guide](#quick-start) (below)
 Try the system yourself with the provided commands to see the AI-powered briefing generation in action.
 
-# Limitations
+## Limitations
 This POC is a proof of concept and there are a lot of limitations.
 
 - Currently it takes about 10 mins and ~ $3 to generate a briefing for a restaurant, there is a lot of room for optimization.
