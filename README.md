@@ -7,7 +7,7 @@ An AI-powered co-pilot that generates sales intelligence briefings for restauran
 Follow this guided tour to understand the solution architecture and technical approach:
 
 ### 1. **Problem Statement** → [`docs/problem-statement.md`](docs/problem-statement.md)
-Build an AI-powered Co-Pilot that generates structured performance summaries for restaurant partners, reducing Sales Executive data gathering time from 30min-3hrs to under 30 seconds.
+Build an AI-powered Co-Pilot that generates structured performance summaries for restaurant partners.
 
 ### 2. **Problem Exploration** → [`docs/problem-exploration.md`](docs/problem-exploration.md)  
 Explores the broader vision of replacing fragmented business processes with unified natural language workflows that can be compiled into code and executed by agentic systems.
