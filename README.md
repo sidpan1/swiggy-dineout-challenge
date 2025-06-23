@@ -12,14 +12,14 @@ Original Problem Statement: Build an AI-powered Co-Pilot that generates structur
 ### 2. **Problem Exploration** → [`docs/problem-exploration.md`](docs/problem-exploration.md)  
 Explores the broader vision of replacing fragmented business processes with unified natural language workflows that can be compiled into code and executed by agentic systems.
 
-### 3. **Data Requirements & Generation** → [`docs/data-requirements-and-generation.md`](docs/data-requirements-and-generation.md)
-Detailed 12-table database schema with 4,180+ realistic records, including restaurant "personalities" that drive authentic performance patterns for AI analysis.
-
-### 4. **Product Requirements Document (PRD)** → [`docs/restaurant-performance-agent-prd.md`](docs/restaurant-performance-agent-prd.md)
+### 3. **Product Requirements Document (PRD)** → [`docs/restaurant-performance-agent-prd.md`](docs/restaurant-performance-agent-prd.md)
 Comprehensive PRD with user stories, acceptance criteria, and evaluation rubrics targeting ≥85% accuracy and 75% reduction in meeting preparation time.
 
-### 5. **System Architecture** → [`docs/system-architecture.md`](docs/system-architecture.md)
+### 4. **System Architecture** → [`docs/system-architecture.md`](docs/system-architecture.md)
 Multi-agent orchestration system with 5 specialized analysts coordinated by a Senior Sales Manager, built on Claude Code with modular prompts and self-improving capabilities.
+
+### 5. **Data Requirements & Generation** → [`docs/data-requirements-and-generation.md`](docs/data-requirements-and-generation.md)
+Detailed 12-table database schema with 4,180+ realistic records, including restaurant "personalities" that drive authentic performance patterns for AI analysis.
 
 ### 6. **Sample Output**
 - [artifacts/8e85652c](artifacts/8e85652c)
