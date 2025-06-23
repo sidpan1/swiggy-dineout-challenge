@@ -47,7 +47,7 @@ Further with time, LLMs will be
 6. Reliable to run asynchronously over increasing amount of time
 7. Available to self-host and run on-premise (smaller models specialized for specific tasks)
 
-Hence it is inevitable that most of knowledge work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems. 
+Hence it is inevitable that most of knowledge and operational work which is SOP driven with a lot of context and domain knowledge will be replaced by agentic systems. Humans will likely be engaged to supervise, verify and approve the actions taken by the agentic system.
 
 # Business Value
 The benefits of agentic systems are manifold. They can not only do tasks now that was not possible with the traditional paradigms, but also do them in a way that is consistent, auditable, and easily modifiable by business users. Further, they can help tie up the loose ends of the business processes and make them more efficient and effective. Business users can now focus on the strategic business logic and let the agentic system take care of the rest.
