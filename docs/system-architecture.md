@@ -136,7 +136,7 @@ Agentic workflows are self-improving AI systems where agents continuously refine
   - Incrementally improve performance for specific use cases
 - Technical experts attest the gains made through these experiments and approve the changes.
 
-These recursively self-improvement systems are now a reality as it has been demonstrated in recent papers like [Alpha Evolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) and [Darwin Godel Machines](https://sakana.ai/dgm/), where the model continuously evolves its scaffolding (like DX, UX, UI, tool abstractions, response format, orchestration etc) to optimise certain metrics. 
+These recursively self-improvement systems are now a reality as it has been demonstrated in recent papers like [Alpha Evolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) and [Darwin Godel Machines](https://sakana.ai/dgm/), where the model continuously evolves its scaffolding (like prompts, code, tool abstractions, response format, orchestration etc) to optimise certain metrics. 
 
 This has the potential to mature into the 4th plane of improvement along with pretraining, RL and test time compute. 
 
