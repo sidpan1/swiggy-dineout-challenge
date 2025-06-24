@@ -110,7 +110,7 @@ Agentic workflows are self-improving AI systems where agents continuously refine
   - **Code** (for deterministic execution)
 - The Technical Expert is responsible for ensuring that the code is correct and works as expected, efficient and performant, they may suggest more changes and implement them with agents.
 
-### 5. **Technical Improvement**
+### 5. **Broader Generalization & Improvement**
 - Agents helps improve the across multiple workflows code to make it more efficient or platformize it by extracting abstractions across use cases.
 - These tasks are done asynchronously in the background and sent for review periodically to technical experts who review it and merge it.
 
@@ -135,6 +135,10 @@ Agentic workflows are self-improving AI systems where agents continuously refine
   - Write code to train small specialized models
   - Incrementally improve performance for specific use cases
 - Technical experts attest the gains made through these experiments and approve the changes.
+
+These recursively self-improvement systems are now a reality as it has been demonstrated in recent papers like [Alpha Evolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) and [Darwin Godel Machines](https://sakana.ai/dgm/), where the model continuously evolves its scaffolding (like DX, UX, UI, tool abstractions, response format, orchestration etc) to optimise certain metrics. 
+
+This has the potential to mature into the 4th plane of improvement along with pretraining, RL and test time compute. 
 
 ## Current Implementation Scope
 However, it would not be possible to build this entire system from scratch in scope of this project. This project implements a minute part of this loop to demonstrate what is possible
