@@ -85,7 +85,7 @@ Stepping back if you have to build a generic platform for building agentic workf
 
 ## Core System Flow
 
-Agentic workflows are self-improving AI systems where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to help people, AI and code to exist on cohesion and maintain synchronicity between the three.
+Agentic workflows are self-improving AI systems where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to help people, agents and code to exist on cohesion and maintain synchronicity between the three.
 
 ![Recursive Cycle](./images/recursive-cycle.svg)
 
