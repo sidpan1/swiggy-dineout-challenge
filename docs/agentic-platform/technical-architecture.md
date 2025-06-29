@@ -110,6 +110,14 @@ Agentic Workflows have the following properties:
 ### Workflow Definition
 - Identifier
 - Prompts
+    - Memory Protocol
+    - Orchestration Protocol
+    - Artifacts Protocol
+    - Output Format
+    - Tool Config
+    - Workflow Instructions
+    - PRD
+    - ...
 - Tool Config
 - Executable
     - Default
@@ -254,6 +262,12 @@ Example Agent SDK: [Google ADK](https://google.github.io/adk-docs/)
         - Dataset Preparation
         - Intent Clustering
 - Monitoring Dashboards
+
+### QA Architecture
+- TDD development
+- Automated tests for all components
+- Rubrics based evaluation for all workflows
+- Continuous monitoring and alerting
 
 ### Security & Governance Architecture
 - RBAC with Auth for all tools
