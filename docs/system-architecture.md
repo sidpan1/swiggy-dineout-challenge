@@ -85,7 +85,7 @@ Stepping back if you have to build a generic platform for building agentic workf
 
 ## Core System Flow
 
-Agentic workflows are self-improving AI systems where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to bridge business requirements with technical execution through recursive iterative improvement cycles.
+Agentic workflows are self-improving AI systems where agents continuously refine both their natural language workflow definitions and their compiled code implementations, with human expert oversight at critical decision points. The system aims to help people, agents and code to exist on cohesion and maintain synchronicity between the three.
 
 ![Recursive Cycle](./images/recursive-cycle.svg)
 
@@ -93,52 +93,55 @@ Agentic workflows are self-improving AI systems where agents continuously refine
 - **Product Owner** enters a problem statement to solve a business problem
 - This triggers the entire agentic workflow system
 
-### 2. **Natural Language Workflow Generation**
-- Agents help build other agents or natural language workflows for a persona
-- Uses the problem statement, PRD (Product Requirements Document), and other relevant context
+### 2. **Problem Refinement**
+- Agents help refine the problem statement, build up the relevant context
+- They help author persona definition, documentation, PRD, standard SOP around what the user's intent.
 - This is approved by Domain Expert and Product Owner after review
 
-### 3. **Workflow Compilation**
-- Agents compile these natural language workflows into a mixture of:
-  - **Agents** (for cognitive execution)
+### 3. **Natural Language Workflow Generation**
+- Agents helps build pure natural language workflows and build basic eval sets around this.
+- Uses the problem statement, PRD (Product Requirements Document), and other relevant context
+- Humans work with the agents to generate basic labelled evaluation sets that reflect the problem statement
+- This is approved by Technical Expert, Domain Expert and Product Owner after review
+
+### 4. **Workflow Compilation**
+- Agents compile these pure natural language workflows into a mixture of:
+  - **LLM Calls** (for cognitive execution)
   - **Code** (for deterministic execution)
-- Requires Technical Expert approval at this stage
-- The Technical Expert is responsible for ensuring that the code is correct and works as expected, efficient and performant
-- The Technical may suggest more changes and implement them with agents.
+- The Technical Expert is responsible for ensuring that the code is correct and works as expected, efficient and performant, they may suggest more changes and implement them with agents.
 
-### 5. **Code Improvement**
-- Agents help improve the code to make it more:
-  - Efficient
-  - Performant
-  - Platformized
-- These tasks are done asynchronously in the background and sent for review periodically to technical experts. 
+### 5. **Broader Generalization & Improvement**
+- Agents helps improve the across multiple workflows code to make it more efficient or platformize it by extracting abstractions across use cases.
+- These tasks are done asynchronously in the background and sent for review periodically to technical experts who review it and merge it.
 
-### 6. **State Reconciliation**
-- Agents reconcile the state of code from the main branch
-- Aligns with exact sources of truth
+### 6. **Workflow Reconciliation**
+- Agents reconcile the state of code from the main branch and aligns with exact sources of truth
 - Updates the natural language workflows accordingly
 - Product owners, domain experts, and technical experts review this change to make sure they are in line with the source of truth. 
 
-### 7. **Evaluation System Building**
-- Agents build systems to evaluate other agents
-- Uses fitness scores based on aggregate success metrics
-- These evaluations are attested by domain experts to make sure labeled and agentic evaluations match.
+### 7. **Build Evaluation Systems**
+- Meanwhile in parallel, agents build systems to evaluate other agents
+- These evaluation systems comprise of the environment which will be used to evaluate the agents, the evaluation functions based on the rubric, fitness scores etc
+- These evaluations are attested by domain experts to make sure labeled datasets (created in step 3) and agentic evaluations match.
 
 ### 8. **Evolutionary Programming**
 - Agents use evolutionary programming to improve the entire system end-to-end
-- This includes orchestration, code, tools, prompts, etc.
-- Based on success metrics
-- Product owners, domain experts, and technical experts review this change to make sure they are in line with the source of truth. 
+- This includes orchestration, code, tools, prompts, etc, and is done on the evaluation system built.
+- Product owners, domain experts, and technical experts review this change before merging
 
-### 8. **Model Training** 
-- Agents use evolutionary programming to:
+### 8. **Evolutionary Model Training** 
+- Agents use evolutionary programming to incrementally:
   - Build proprietary datasets
   - Write code to train small specialized models
   - Incrementally improve performance for specific use cases
 - Technical experts attest the gains made through these experiments and approve the changes.
 
+These recursively self-improvement systems are now a reality as it has been demonstrated in recent papers like [Alpha Evolve](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) and [Darwin Godel Machines](https://sakana.ai/dgm/), where the model continuously evolves its scaffolding (like prompts, code, tool abstractions, response format, orchestration etc) to optimise certain metrics. 
+
+This has the potential to mature into the 4th plane of improvement along with pretraining, RL and test time compute. 
+
 ## Current Implementation Scope
-However, it would not be possible to build this entire system from scratch in scope of this project. This project implements points **3** and **7** from the core workflow to build a basic POC for solving the problem statement.
+However, it would not be possible to build this entire system from scratch in scope of this project. This project implements a minute part of this loop to demonstrate what is possible
 
 ## Agentic Workflow : Curent Components and Implementation
 We try to keep the architecture as simple as possible, and complexity be introduced only when there is a need. For example, the first version of an agentic workflow might be entirely LLM-driven, while future versions are optimized to be partially deterministic based on the use case.

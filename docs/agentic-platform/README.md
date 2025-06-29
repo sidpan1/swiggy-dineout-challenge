@@ -34,13 +34,6 @@ Most organizations today juggle four fragmented automation approaches: coded log
 - **Meta-Intelligence**: Using AI to optimize AI workflows recursively
 - **Autonomy Levels**: L1 (Task execution) → L2 (Workflow execution) → L3 (Job role execution)
 
-## Quick Start by Role
-
-- **Business Leaders**: Read the Concept document → Focus on User Stories and Success Criteria
-- **Product/Process Owners**: Read both documents → Focus on Workflow Design and User Personas
-- **Technical Teams**: Start with Architecture → Focus on Agent SDK and Service Architecture
-- **General Understanding**: Read Concept first, then Architecture overview sections
-
 ## Visual Framework
 
 The platform operates on a **recursive self-improvement cycle** where meta-workflows continuously analyze and optimize core business workflows, creating exponential capability growth rather than linear efficiency gains.
