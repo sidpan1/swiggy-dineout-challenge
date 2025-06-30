@@ -135,6 +135,7 @@ The Agentic Platform is a platform to build, manage, operate, and optimize agent
 
 #### Surface Types
 - Internal Assistant App (Web + Mobile)
+- Generative UI Apps (Web + Mobile)
 - SDKs (with fullstack support)
     - Backend
     - Web
