@@ -134,8 +134,8 @@ The Agentic Platform is a platform to build, manage, operate, and optimize agent
 ### UX Architecture
 
 #### Surface Types
-- Internal Chat App
-- SDKs
+- Internal Assistant App (Web + Mobile)
+- SDKs (with fullstack support)
     - Backend
     - Web
     - Mobile
@@ -147,6 +147,12 @@ The Agentic Platform is a platform to build, manage, operate, and optimize agent
 - Local CLI/Code Editors
     - Claude Code
     - Cursor
+
+#### Modes of Operation
+- Sync
+- Ambient
+- Async
+- Batch
 
 #### Modalities
 - Chat
