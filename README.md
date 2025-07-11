@@ -49,6 +49,10 @@ These are the specialized prompts that define agent roles and workflows:
     - [evaluation_results.md](artifacts/fd0acfd4/evaluation_results.md)
     - [pizza_palace_dashboard.html](artifacts/fd0acfd4/pizza_palace_dashboard.html)
 
+(revamped the structure of the report to make it more actionable)    
+- [artifacts/7af0653a](artifacts/7af0653a)
+    - [spice_garden_revenue_action_center.html](artifacts/7af0653a/spice_garden_revenue_action_center.html)
+
 (HTML Dashboards need to be downloaded and opened in browser. A bit raw, not evaluated yet - check the prompt here : [dashboard-generator.md](prompts/dashboard-generator.md))
 
 ### 8. **Run the System** → [Quick Start Guide](#quick-start) (below)
